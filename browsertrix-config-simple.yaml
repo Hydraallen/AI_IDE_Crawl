@@ -1,0 +1,112 @@
+# Browsertrix-Crawler Configuration for AI Coding Tools Project
+# The 2026 AI Coding Assistant Evolution
+# Updated: 2026-03-15 - Final optimized exclusion rules (with Trae)
+
+# Basic settings
+collection: ai-coding-assistants
+workers: 4
+generateWACZ: true
+
+# Crawl limits
+pageLimit: 1000
+depth: 2
+pageLoadTimeout: 90
+
+# Output directory
+cwd: /crawls
+
+# Seeds
+seeds:
+  # ==========================================================================
+  # Native AI IDEs
+  # ==========================================================================
+
+  # Cursor - Exclude API, forum, trust, status, en-US, careers, dashboard, pagination
+  - url: https://www.cursor.com/
+    scopeType: domain
+    exclude:
+      - ".*/api/.*"
+      - ".*forum\\.cursor\\.com.*"
+      - ".*trust\\.cursor\\.com.*"
+      - ".*status\\.cursor\\.com.*"
+      - ".*/en-US/.*"
+      - ".*contact-sales\\?.*"
+      - ".*/careers/.*"
+      - ".*/dashboard\\?.*"
+      - ".*/page/\\d+.*"
+    depth: 2
+
+  # Windsurf - Exclude login, register, API, trust subdomain
+  - url: https://windsurf.com/
+    scopeType: domain
+    exclude:
+      - ".*/account/(login|register).*"
+      - ".*/api/.*"
+      - ".*trust\\.windsurf\\.com.*"
+    depth: 2
+
+  # Antigravity
+  - url: https://antigravity.google/
+    scopeType: domain
+    depth: 2
+
+  # Trae - Exclude blog, docs, download, solo, legal pages, temporary campaigns
+  - url: https://www.trae.ai/
+    scopeType: domain
+    exclude:
+      - ".*lf-cdn\\.trae\\.ai.*"
+      - ".*/login.*"
+      - ".*/blog/.*"
+      - ".*docs\\.trae\\.ai.*"
+      - ".*/download.*"
+      - ".*/solo.*"
+      - ".*/(privacy-policy|terms-of-service).*"
+      - ".*/\\d{4}-anniversary-gift.*"
+    depth: 2
+
+  # OpenClaw - Exclude trust center non-English
+  - url: https://openclaw.ai/
+    scopeType: domain
+    exclude:
+      - ".*trust\\.openclaw\\.ai/trust/(ja|ko|zh-cn).*"
+    depth: 2
+
+  # ==========================================================================
+  # AI Coding Tools
+  # ==========================================================================
+
+  # GitHub Copilot - Exclude locale parameter URLs
+  - url: https://github.com/features/copilot
+    scopeType: prefix
+    exclude:
+      - ".*\\?locale=.*"
+    depth: 2
+
+  # Bolt.new - Exclude discord, status, URL parameters
+  - url: https://bolt.new/
+    scopeType: domain
+    exclude:
+      - ".*discord\\.bolt\\.new.*"
+      - ".*status\\.bolt\\.new.*"
+      - ".*\\?(get_started|showPricing)=.*"
+    depth: 2
+
+  # Replit AI - Exclude login, signup, SEO landing pages
+  - url: https://replit.com/ai
+    scopeType: prefix
+    exclude:
+      - ".*/(login|signup).*"
+      - ".*/build/.*"
+      - ".*/(sign%20up|t/new).*"
+    depth: 2
+
+  # Claude - Exclude multi-language, pagination, redirect, resources, plugins
+  - url: https://claude.com/
+    scopeType: domain
+    exclude:
+      - ".*/(de-de|fr-fr|ja-jp|es-es|pt-br|zh-cn|ko-kr|it-it)/.*"
+      - ".*\\?.*_page=.*"
+      - ".*/redirect/.*"
+      - ".*/resources/use-cases/.*"
+      - ".*/plugins/.*"
+    depth: 2

@@ -1,0 +1,162 @@
+# Browsertrix-Crawler Configuration for AI Coding Tools Project
+# The 2026 AI Coding Assistant Evolution
+# Generated: 2026-03-12
+
+# Basic settings
+verbose: true
+collection: ai-coding-assistants
+workers: 4
+generateWACZ: true
+
+# Crawl limits
+limit: 500
+maxDepth: 3
+timeout: 60
+
+# Behaviors for JS-heavy sites
+behaviors:
+  - autoplay
+  - autofetch
+  - autoscroll
+behaviorTimeout: 90
+
+# Text extraction (useful for full-text search)
+text: false
+
+# User agent
+userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+
+# ============================================================================
+# Native AI IDEs
+# ============================================================================
+
+seeds:
+  # --------------------------------------------------------------------------
+  # Cursor (5 pages)
+  # --------------------------------------------------------------------------
+  - url: https://www.cursor.com/
+    scopeType: domain
+    include:
+      - "^https?://(www\\.)?cursor\\.com/"
+    exclude:
+      - ".*cursor\\.com/forum.*"
+      - ".*cursor\\.com/dashboard.*"
+      - ".*cursor\\.com/settings.*"
+    maxDepth: 2
+
+  # --------------------------------------------------------------------------
+  # Windsurf (4 pages)
+  # --------------------------------------------------------------------------
+  - url: https://windsurf.com/
+    scopeType: domain
+    include:
+      - "^https?://(www\\.)?windsurf\\.com/"
+      - "^https?://docs\\.windsurf\\.com/"
+    exclude:
+      - ".*windsurf\\.com/dashboard.*"
+      - ".*windsurf\\.com/settings.*"
+      - ".*windsurf\\.com/account.*"
+    maxDepth: 2
+
+  # --------------------------------------------------------------------------
+  # Antigravity (5 pages)
+  # --------------------------------------------------------------------------
+  - url: https://antigravity.google/
+    scopeType: domain
+    include:
+      - "^https?://antigravity\\.google/"
+    exclude:
+      - ".*antigravity\\.google/dashboard.*"
+      - ".*antigravity\\.google/settings.*"
+    maxDepth: 2
+
+  # --------------------------------------------------------------------------
+  # Trae (3 pages)
+  # --------------------------------------------------------------------------
+  - url: https://www.trae.ai/
+    scopeType: domain
+    include:
+      - "^https?://(www\\.)?trae\\.ai/"
+    exclude:
+      - ".*trae\\.ai/dashboard.*"
+      - ".*trae\\.ai/settings.*"
+      - ".*trae\\.ai/login.*"
+    maxDepth: 2
+
+  # --------------------------------------------------------------------------
+  # OpenClaw (2 pages)
+  # --------------------------------------------------------------------------
+  - url: https://openclaw.ai/
+    scopeType: domain
+    include:
+      - "^https?://openclaw\\.ai/"
+      - "^https?://docs\\.openclaw\\.ai/"
+    exclude:
+      - ".*openclaw\\.ai/dashboard.*"
+      - ".*openclaw\\.ai/login.*"
+    maxDepth: 2
+
+  # ============================================================================
+  # AI Coding Tools
+  # ============================================================================
+
+  # --------------------------------------------------------------------------
+  # GitHub Copilot (5 pages)
+  # --------------------------------------------------------------------------
+  - url: https://github.com/features/copilot
+    scopeType: prefix
+    include:
+      - "^https?://github\\.com/features/copilot"
+      - "^https?://docs\\.github\\.com/copilot"
+    exclude:
+      - ".*github\\.com/login.*"
+      - ".*github\\.com/signup.*"
+      - ".*github\\.com/marketplace.*"
+    maxDepth: 2
+
+  # --------------------------------------------------------------------------
+  # Bolt.new (4 pages)
+  # --------------------------------------------------------------------------
+  - url: https://bolt.new/
+    scopeType: domain
+    include:
+      - "^https?://bolt\\.new/"
+      - "^https?://support\\.bolt\\.new/"
+      - "^https?://docs\\.bolt\\.new/"
+    exclude:
+      - ".*bolt\\.new/dashboard.*"
+      - ".*bolt\\.new/settings.*"
+      - ".*bolt\\.new/api.*"
+    maxDepth: 2
+
+  # --------------------------------------------------------------------------
+  # Replit (4 pages)
+  # --------------------------------------------------------------------------
+  - url: https://replit.com/ai
+    scopeType: prefix
+    include:
+      - "^https?://replit\\.com/ai"
+      - "^https?://replit\\.com/pricing"
+      - "^https?://replit\\.com/help"
+      - "^https?://replit\\.com/enterprise"
+    exclude:
+      - ".*replit\\.com/~.*"
+      - ".*replit\\.com/@.*"
+      - ".*replit\\.com/login.*"
+      - ".*replit\\.com/signup.*"
+    maxDepth: 2
+
+  # --------------------------------------------------------------------------
+  # Claude (3 pages)
+  # --------------------------------------------------------------------------
+  - url: https://claude.com/solutions/coding
+    scopeType: domain
+    include:
+      - "^https?://claude\\.com/"
+      - "^https?://docs\\.anthropic\\.com/"
+    exclude:
+      - ".*claude\\.com/login.*"
+      - ".*claude\\.com/settings.*"
+      - ".*claude\\.com/account.*"
+      - ".*anthropic\\.com/research.*"
+    maxDepth: 2
