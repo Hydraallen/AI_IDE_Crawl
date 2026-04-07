@@ -15,6 +15,7 @@ __pycache__/
 compare_script/changes_summary.json
 compare_script/real_changes.json
 compare_script/real_changes_full.json
+compare_script/real_changes_full.md
 compare_script/categorized_changes.md
 compare_script/comparison_report.md
 compare_script/detailed_changes.md
