@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+._*
+
+# Crawl data (180GB+ WARC/WACZ archives)
+crawls/
+
+# Python
+compare_script/venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated comparison outputs (can be regenerated from crawl data)
+compare_script/changes_summary.json
+compare_script/real_changes.json
+compare_script/real_changes_full.json
+compare_script/categorized_changes.md
+compare_script/comparison_report.md
+compare_script/detailed_changes.md
+compare_script/real_changes.md
+compare_script/text_changes.md
+compare_script/reports/
+compare_script/reports_*/
