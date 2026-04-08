@@ -98,6 +98,50 @@ def get_available_dates() -> list[str]:
 _cache_lock = threading.Lock()
 _url_cache: dict[str, list[dict]] = {}
 
+# CSS/JS resource cache: date -> {url: (content_bytes, content_type)}
+_resource_cache: dict[str, dict[str, tuple[bytes, str]]] = {}
+
+_RESOURCE_TYPES = frozenset({
+    "text/css", "text/javascript", "application/javascript",
+    "application/x-javascript",
+})
+
+_MAX_RESOURCE_SIZE = 2_000_000  # 2MB per file
+
+
+def _build_resource_cache(date_str: str) -> None:
+    """Build CSS/JS resource cache for a date by scanning WARC files."""
+    with _cache_lock:
+        if date_str in _resource_cache:
+            return
+
+    resources: dict[str, tuple[bytes, str]] = {}
+    for warc_path in _warc_files(date_str):
+        with gzip.open(str(warc_path), "rb") as stream:
+            for record in ArchiveIterator(stream):
+                if record.rec_type != "response":
+                    continue
+                url = record.rec_headers.get_header("WARC-Target-URI", "")
+                if not url:
+                    continue
+                content_type = ""
+                if record.http_headers:
+                    ct = record.http_headers.get_header("Content-Type", "")
+                    content_type = ct.split(";")[0].strip()
+                if content_type in _RESOURCE_TYPES:
+                    payload = record.content_stream().read()
+                    if len(payload) <= _MAX_RESOURCE_SIZE:
+                        resources[url] = (payload, content_type)
+
+    with _cache_lock:
+        _resource_cache[date_str] = resources
+    print(f"    Resource cache built for {date_str}: {len(resources)} CSS/JS files")
+
+
+def ensure_resource_cache(date_str: str) -> None:
+    """Public API: build resource cache for a date."""
+    _build_resource_cache(date_str)
+
 
 def _get_urls_cached(date_str: str) -> list[dict]:
     with _cache_lock:
@@ -150,6 +194,28 @@ class WARCViewerHandler(BaseHTTPRequestHandler):
                 return
             self._serve_viewer(date_str, url)
         else:
+            # Try to serve subresource (CSS/JS) using Referer header
+            referer = self.headers.get("Referer", "")
+            if "/api/page" in referer:
+                ref_params = parse_qs(urlparse(referer).query)
+                ref_date = ref_params.get("date", [""])[0]
+                ref_url = ref_params.get("url", [""])[0]
+                if ref_date and ref_url:
+                    origin = f"{urlparse(ref_url).scheme}://{urlparse(ref_url).netloc}"
+                    full_url = f"{origin}{path}"
+                    if parsed.query:
+                        full_url += f"?{parsed.query}"
+                    # Look up in resource cache
+                    cache = _resource_cache.get(ref_date, {})
+                    if full_url in cache:
+                        content, content_type = cache[full_url]
+                        self.send_response(200)
+                        self.send_header("Content-Type", content_type)
+                        self.send_header("Content-Length", str(len(content)))
+                        self.send_header("Access-Control-Allow-Origin", "*")
+                        self.end_headers()
+                        self.wfile.write(content)
+                        return
             self.send_error(404)
 
     def _serve_json(self, data: object, code: int = 200) -> None:

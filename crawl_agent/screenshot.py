@@ -79,15 +79,12 @@ def _screenshot_dir(old_date: str, new_date: str) -> Path:
 def _screenshot_page(context, url: str, output_path: Path) -> bool:
     """Navigate to a URL and take a full-page screenshot. Returns True on success."""
     page = context.new_page()
-    # Block unnecessary resources to speed up loading WARC-served pages
-    page.route("**/*.{css,js,woff,woff2,ttf,eot,svg,png,jpg,jpeg,gif,webp,ico}",
-               lambda route: route.abort())
     try:
-        resp = page.goto(url, wait_until="domcontentloaded", timeout=10000)
+        resp = page.goto(url, wait_until="networkidle", timeout=30000)
         if resp and resp.status >= 400:
             page.close()
             return False
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(1000)
         page.screenshot(path=str(output_path), full_page=True)
         return True
     except Exception:
@@ -117,6 +114,13 @@ def capture_screenshots(
     _ensure_viewer()
     shot_dir = _screenshot_dir(old_date, new_date)
     base_url = f"http://127.0.0.1:{_VIEWER_PORT}"
+
+    # Pre-build CSS/JS resource caches so subresources can be served
+    from crawl_agent.warc_viewer import ensure_resource_cache
+    print(f"    Building resource cache for {old_date}...")
+    ensure_resource_cache(old_date)
+    print(f"    Building resource cache for {new_date}...")
+    ensure_resource_cache(new_date)
 
     ranked = sorted(text_changes, key=lambda c: c.get("similarity", 1.0))
     targets = ranked[:max_screenshots]
