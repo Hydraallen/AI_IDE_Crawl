@@ -6,10 +6,14 @@
 crawls/
 
 # Python
+.venv/
 compare_script/venv/
 __pycache__/
 *.pyc
 *.pyo
+
+# Crawl agent cache
+crawl_agent/.cache/
 
 # Generated comparison outputs (can be regenerated from crawl data)
 compare_script/changes_summary.json

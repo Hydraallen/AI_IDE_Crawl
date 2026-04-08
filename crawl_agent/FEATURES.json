@@ -1,0 +1,157 @@
+{
+  "project": "crawl_agent - LangChain Web Archive Analysis Agent",
+  "created": "2026-04-08",
+  "plan_file": "plan.md",
+  "steps": [
+    {
+      "id": 1,
+      "category": "setup",
+      "description": "Create project root .venv and install all dependencies (langchain, langchain-openai, warcio, beautifulsoup4, lxml, pydantic)",
+      "steps": [
+        "Run: python3 -m venv .venv",
+        "Run: source .venv/bin/activate && pip install -r crawl_agent/requirements.txt",
+        "Verify: python -c 'import langchain; import warcio; import bs4; print(\"OK\")'"
+      ],
+      "passes": true
+    },
+    {
+      "id": 2,
+      "category": "setup",
+      "description": "Create crawl_agent/ package with __init__.py and requirements.txt",
+      "steps": [
+        "Create crawl_agent/__init__.py",
+        "Create crawl_agent/requirements.txt with: langchain>=0.3.0, langchain-openai>=0.3.0, langchain-core>=0.3.0, pydantic>=2.0, warcio>=1.7, beautifulsoup4>=4.12, lxml>=5.0"
+      ],
+      "passes": true
+    },
+    {
+      "id": 3,
+      "category": "core",
+      "description": "Implement config.py: load env file, define path constants, get_available_dates(), get_consecutive_pairs()",
+      "steps": [
+        "Read project root 'env' file to get GLM_ENDPOINT, GLM_API_KEY, GLM_MODEL_NAME",
+        "Define PROJECT_ROOT, COLLECTIONS_DIR, COMPARE_SCRIPT_DIR, REPORTS_DIR, CACHE_DIR",
+        "Implement get_available_dates() scanning crawls/collections/",
+        "Implement get_consecutive_pairs() yielding adjacent date pairs (skip gaps like 0322->0324)",
+        "Verified: 23 dates, 21 consecutive pairs found"
+      ],
+      "passes": true
+    },
+    {
+      "id": 4,
+      "category": "core",
+      "description": "Implement cache.py: JSON-based WARC parse cache with checksum validation",
+      "steps": [
+        "Implement get_parsed_collection(date_str, extract_text) with cache-first logic",
+        "Cache location: crawl_agent/.cache/parsed/{date}.json",
+        "Implement checksum validation (WARC filenames + sizes SHA-256)",
+        "Delegate actual parsing to crawl_compare.parse_warc_collection()",
+        "Verify: cache a single collection and check .cache/ directory exists with valid JSON"
+      ],
+      "passes": true
+    },
+    {
+      "id": 5,
+      "category": "core",
+      "description": "Implement warc_loader.py: thin wrapper importing compare_script functions with cache layer",
+      "steps": [
+        "sys.path.insert(0, COMPARE_SCRIPT_DIR) to import from compare_script",
+        "Implement get_collection_data(date_str)",
+        "Implement compare_two_dates(old, new)",
+        "Implement get_text_diff_for_url(url, old, new)",
+        "Implement get_domains_for_date(date_str)",
+        "Implement get_page_content(url, date_str)",
+        "Verify: compare_two_dates('20260315', '20260316') returns non-empty result"
+      ],
+      "passes": true
+    },
+    {
+      "id": 6,
+      "category": "core",
+      "description": "Implement llm_client.py: ChatOpenAI wrapper for GLM-5.1 via OpenAI-compatible API",
+      "steps": [
+        "Create get_llm(temperature=0.1) returning ChatOpenAI with base_url=GLM_ENDPOINT",
+        "Add rate-limit sleep wrapper (configurable delay)",
+        "Verify: get_llm().invoke('hello') returns a response"
+      ],
+      "passes": true
+    },
+    {
+      "id": 7,
+      "category": "core",
+      "description": "Implement prompts.py: system prompt, analysis prompt, interactive prompt templates",
+      "steps": [
+        "Write SYSTEM_PROMPT: web archive analyst persona for AI coding tools",
+        "Write ANALYSIS_PROMPT: structured template for batch mode (date, stats, domain breakdown, changes)",
+        "Write INTERACTIVE_SYSTEM_PROMPT: for agent mode with tool usage guidance",
+        "Include change classification: new feature / pricing / design / docs / blog / infrastructure"
+      ],
+      "passes": true
+    },
+    {
+      "id": 8,
+      "category": "core",
+      "description": "Implement tools.py: 6 LangChain @tool definitions with Pydantic schemas",
+      "steps": [
+        "compare_dates(old_date, new_date) -> domain-grouped summary",
+        "get_page_changes(url, old_date, new_date) -> detailed text diff",
+        "get_domain_changes(domain, old_date, new_date) -> filtered by domain",
+        "list_available_dates() -> all crawl dates",
+        "analyze_trend(domain, start_date, end_date) -> time series",
+        "search_changes(keyword, date?) -> keyword search",
+        "Verify: list_available_dates() returns 23+ dates"
+      ],
+      "passes": true
+    },
+    {
+      "id": 9,
+      "category": "mode",
+      "description": "Implement batch.py: CLI batch processor for all consecutive date pairs",
+      "steps": [
+        "Implement run_batch() with date pair iteration",
+        "Load cached data -> compare -> build prompt -> call LLM -> write report",
+        "Truncate to top 30 most significant changes per pair",
+        "Rate limit delay between LLM calls (configurable)",
+        "Skip existing reports by default, --force to override",
+        "LLM error handling: 3 retries with exponential backoff",
+        "Verify: run on single pair (20260315 vs 20260316) and check reports/ output"
+      ],
+      "passes": true
+    },
+    {
+      "id": 10,
+      "category": "mode",
+      "description": "Implement agent.py: interactive LangChain ReAct agent with REPL",
+      "steps": [
+        "Create agent with create_react_agent(llm, tools, prompt)",
+        "REPL loop: user input -> agent reasoning -> tool calls -> response",
+        "Configure max_iterations=10, handle_parsing_errors=True",
+        "Verify: start agent and ask 'list available dates'"
+      ],
+      "passes": true
+    },
+    {
+      "id": 11,
+      "category": "mode",
+      "description": "Implement main.py: CLI entry point dispatching batch/agent modes",
+      "steps": [
+        "argparse with subcommands: batch, agent",
+        "batch: --start-date, --end-date, --delay, --force, --output",
+        "agent: no special args",
+        "Verify: python crawl_agent/main.py --help shows both modes"
+      ],
+      "passes": false
+    },
+    {
+      "id": 12,
+      "category": "verification",
+      "description": "End-to-end verification: batch mode produces correct reports, agent mode answers queries",
+      "steps": [
+        "Run batch on 20260315-20260316 pair - SUCCESS: report generated with all sections",
+        "Report verified: Executive Summary, Statistics (15207/14823 URLs), Domain Breakdown, Significant Changes (Cursor pricing, OpenClaw docs, Replit gallery), Trend Analysis",
+        "Stats match expected: 2529 added, 2913 removed, 1807 changed, 31 text changes"
+      ],
+      "passes": true
+    }
+  ]
+}

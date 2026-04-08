@@ -1,0 +1,23 @@
+# crawl_agent Progress Log
+# Each session adds entries here for the next session to pick up.
+
+Session: 2026-04-07 (init)
+- Created crawl_agent package structure (__init__.py, requirements.txt)
+- Created init.sh for environment setup
+- Created this progress file
+- Created FEATURES.json with 12 steps
+
+Session: 2026-04-08
+- Step 1: Created .venv in project root, installed all deps (langchain, warcio, bs4, lxml, pydantic) ✓
+- Step 2: Created crawl_agent/ package with __init__.py, requirements.txt ✓
+- Step 3: Implemented config.py - loads env, defines path constants, get_available_dates() (23 dates), get_consecutive_pairs() (21 pairs) ✓
+- Step 4: Implemented cache.py - JSON cache with SHA-256 checksum validation, delegates to crawl_compare.parse_warc_collection() ✓
+- Step 5: Implemented warc_loader.py - wraps compare_script functions with cache layer ✓
+- Step 6: Implemented llm_client.py - ChatOpenAI for GLM-5.1 with rate limiting and retry ✓
+- Step 7: Implemented prompts.py - SYSTEM_PROMPT, ANALYSIS_PROMPT, INTERACTIVE_SYSTEM_PROMPT ✓
+- Step 8: Implemented tools.py - 6 LangChain @tool with Pydantic schemas ✓
+- Step 9: Implemented batch.py - CLI batch processor with retry and rate limiting ✓
+- Step 10: Implemented agent.py - ReAct agent with REPL loop ✓
+- Step 11: Implemented main.py - CLI entry point with batch/agent subcommands ✓
+- All imports verified: config, llm_client, prompts (6 tools), CLI --help works
+- Next: Step 12 - End-to-end verification (run batch on real data, test agent mode)
