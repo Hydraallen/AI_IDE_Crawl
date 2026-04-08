@@ -15,6 +15,9 @@ __pycache__/
 # Crawl agent cache
 crawl_agent/.cache/
 
+# Reports (can be regenerated)
+reports/
+
 # Generated comparison outputs (can be regenerated from crawl data)
 compare_script/changes_summary.json
 compare_script/real_changes.json

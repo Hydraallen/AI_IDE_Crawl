@@ -66,7 +66,7 @@ cd "../Collection Plan Update" && pdflatex Collection_Update.tex && bibtex Colle
 5. Categorizes by domain (DOMAIN_PATTERNS maps URLs to tool names)
 
 ### Scheduled Crawls
-A launchd plist (`com.aicoding.browsertrix-crawl.plist`) runs daily at 2:00 AM. Logs go to `crawls/crawl.log` and `crawls/crawl-error.log`.
+A launchd plist (`com.auto.browsertrix-crawl.plist`) runs daily at 2:00 AM. Logs go to `crawls/crawl.log` and `crawls/crawl-error.log`.
 
 ## Key Configuration
 
