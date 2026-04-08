@@ -45,11 +45,26 @@ def _format_domain_breakdown(text_changes: list) -> str:
     return header + "\n".join(rows)
 
 
-def _format_changes_data(text_changes: list, max_items: int = 30) -> str:
+def _format_changes_data(text_changes: list, max_items: int = 15) -> str:
     items = []
     for change in text_changes[:max_items]:
         items.append(json.dumps(change, ensure_ascii=False, indent=2))
     return "\n\n".join(items)
+
+
+def _insert_screenshots(report: str, screenshot_section: str) -> str:
+    """Insert screenshot section into the report before the last section."""
+    if not screenshot_section:
+        return report
+
+    # Try to insert before Trend Analysis or at the end
+    markers = ["## Trend Analysis", "## Minor Changes", "## Changes Not Detected"]
+    for marker in markers:
+        idx = report.find(marker)
+        if idx != -1:
+            return report[:idx] + screenshot_section + "\n" + report[idx:]
+
+    return report + "\n\n" + screenshot_section
 
 
 def run_batch(
@@ -57,6 +72,7 @@ def run_batch(
     end_date: str | None = None,
     delay: float = 1.0,
     force: bool = False,
+    screenshots: bool = True,
 ) -> None:
     """Run batch analysis on all consecutive date pairs."""
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -99,6 +115,27 @@ def run_batch(
             )
 
             report_content = call_llm_with_retry(llm, prompt)
+
+            # Take screenshots of changed pages
+            screenshot_section = ""
+            if screenshots and result["text_changes"]:
+                print(f"  Capturing screenshots...")
+                from crawl_agent.screenshot import (
+                    capture_screenshots,
+                    build_screenshot_section,
+                )
+                shot_map = capture_screenshots(
+                    result["text_changes"],
+                    old_date,
+                    new_date,
+                    max_screenshots=10,
+                )
+                screenshot_section = build_screenshot_section(
+                    shot_map, result["text_changes"]
+                )
+
+            if screenshot_section:
+                report_content = _insert_screenshots(report_content, screenshot_section)
 
             with open(report_path, "w") as f:
                 f.write(report_content)

@@ -19,6 +19,7 @@ def main() -> None:
     batch_parser.add_argument("--end-date", help="End date (YYYYMMDD)")
     batch_parser.add_argument("--delay", type=float, default=1.0, help="Delay between LLM calls (seconds)")
     batch_parser.add_argument("--force", action="store_true", help="Overwrite existing reports")
+    batch_parser.add_argument("--no-screenshots", action="store_true", help="Skip screenshot capture")
 
     subparsers.add_parser("agent", help="Interactive agent mode")
 
@@ -31,6 +32,7 @@ def main() -> None:
             end_date=args.end_date,
             delay=args.delay,
             force=args.force,
+            screenshots=not args.no_screenshots,
         )
     elif args.command == "agent":
         from crawl_agent.agent import run_agent

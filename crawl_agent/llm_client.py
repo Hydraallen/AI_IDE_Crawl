@@ -14,7 +14,7 @@ def get_llm(temperature: float = 0.1) -> ChatOpenAI:
         api_key=GLM_API_KEY,
         temperature=temperature,
         max_tokens=4096,
-        request_timeout=60,
+        request_timeout=180,
     )
 
 
@@ -36,7 +36,7 @@ def call_llm_with_retry(llm: ChatOpenAI, prompt: str, max_retries: int = 3) -> s
             _last_call_time = time.time()
             return response.content
         except Exception as e:
-            wait = 2 ** (attempt + 1)
+            wait = 4 * (2 ** attempt)
             print(f"  LLM error (attempt {attempt + 1}/{max_retries}): {e}")
             if attempt < max_retries - 1:
                 print(f"  Retrying in {wait}s...")
