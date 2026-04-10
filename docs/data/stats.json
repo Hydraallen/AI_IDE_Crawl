@@ -1,0 +1,178 @@
+{
+  "20260315_20260316": {
+    "total_old": 15207,
+    "total_new": 14823,
+    "added_count": 2529,
+    "removed_count": 2913,
+    "changed_count": 1807,
+    "unchanged_count": 10487
+  },
+  "20260316_20260317": {
+    "total_old": 14823,
+    "total_new": 16082,
+    "added_count": 4520,
+    "removed_count": 3261,
+    "changed_count": 2707,
+    "unchanged_count": 8855
+  },
+  "20260317_20260318": {
+    "total_old": 16082,
+    "total_new": 15345,
+    "added_count": 3646,
+    "removed_count": 4383,
+    "changed_count": 3074,
+    "unchanged_count": 8625
+  },
+  "20260318_20260319": {
+    "total_old": 15345,
+    "total_new": 15465,
+    "added_count": 4006,
+    "removed_count": 3886,
+    "changed_count": 2853,
+    "unchanged_count": 8606
+  },
+  "20260319_20260320": {
+    "total_old": 15465,
+    "total_new": 15308,
+    "added_count": 3172,
+    "removed_count": 3329,
+    "changed_count": 2724,
+    "unchanged_count": 9412
+  },
+  "20260320_20260321": {
+    "total_old": 15308,
+    "total_new": 16306,
+    "added_count": 4303,
+    "removed_count": 3305,
+    "changed_count": 2901,
+    "unchanged_count": 9102
+  },
+  "20260321_20260322": {
+    "total_old": 16306,
+    "total_new": 16738,
+    "added_count": 3355,
+    "removed_count": 2923,
+    "changed_count": 2404,
+    "unchanged_count": 10979
+  },
+  "20260324_20260325": {
+    "total_old": 14858,
+    "total_new": 15840,
+    "added_count": 4094,
+    "removed_count": 3112,
+    "changed_count": 2882,
+    "unchanged_count": 8864
+  },
+  "20260325_20260326": {
+    "total_old": 15840,
+    "total_new": 18237,
+    "added_count": 6050,
+    "removed_count": 3653,
+    "changed_count": 2979,
+    "unchanged_count": 9208
+  },
+  "20260326_20260327": {
+    "total_old": 18237,
+    "total_new": 15367,
+    "added_count": 3322,
+    "removed_count": 6192,
+    "changed_count": 2395,
+    "unchanged_count": 9650
+  },
+  "20260327_20260328": {
+    "total_old": 15367,
+    "total_new": 9992,
+    "added_count": 2075,
+    "removed_count": 7450,
+    "changed_count": 1609,
+    "unchanged_count": 6308
+  },
+  "20260328_20260329": {
+    "total_old": 9992,
+    "total_new": 10953,
+    "added_count": 3002,
+    "removed_count": 2041,
+    "changed_count": 1198,
+    "unchanged_count": 6753
+  },
+  "20260329_20260330": {
+    "total_old": 10953,
+    "total_new": 16481,
+    "added_count": 7519,
+    "removed_count": 1991,
+    "changed_count": 997,
+    "unchanged_count": 7965
+  },
+  "20260330_20260331": {
+    "total_old": 16481,
+    "total_new": 15158,
+    "added_count": 3080,
+    "removed_count": 4403,
+    "changed_count": 2405,
+    "unchanged_count": 9673
+  },
+  "20260331_20260401": {
+    "total_old": 15158,
+    "total_new": 17103,
+    "added_count": 4892,
+    "removed_count": 2947,
+    "changed_count": 2764,
+    "unchanged_count": 9447
+  },
+  "20260401_20260402": {
+    "total_old": 17103,
+    "total_new": 17755,
+    "added_count": 4354,
+    "removed_count": 3702,
+    "changed_count": 2861,
+    "unchanged_count": 10540
+  },
+  "20260402_20260403": {
+    "total_old": 17755,
+    "total_new": 21384,
+    "added_count": 7863,
+    "removed_count": 4234,
+    "changed_count": 2843,
+    "unchanged_count": 10678
+  },
+  "20260403_20260404": {
+    "total_old": 21384,
+    "total_new": 17327,
+    "added_count": 4011,
+    "removed_count": 8068,
+    "changed_count": 3032,
+    "unchanged_count": 10284
+  },
+  "20260404_20260405": {
+    "total_old": 17327,
+    "total_new": 16472,
+    "added_count": 4144,
+    "removed_count": 4999,
+    "changed_count": 2207,
+    "unchanged_count": 10121
+  },
+  "20260405_20260406": {
+    "total_old": 16472,
+    "total_new": 17591,
+    "added_count": 4849,
+    "removed_count": 3730,
+    "changed_count": 2034,
+    "unchanged_count": 10708
+  },
+  "20260406_20260407": {
+    "total_old": 17591,
+    "total_new": 18287,
+    "added_count": 4788,
+    "removed_count": 4092,
+    "changed_count": 2522,
+    "unchanged_count": 10977
+  },
+  "20260407_20260408": {
+    "total_old": 18287,
+    "total_new": 16426,
+    "added_count": 3782,
+    "removed_count": 5643,
+    "changed_count": 3089,
+    "unchanged_count": 9555
+  }
+}
