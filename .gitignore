@@ -23,6 +23,12 @@ crawl_agent/.cache/
 # Reports (can be regenerated)
 reports/
 
+# Course deliverables (keep locally only)
+Collection Plan/
+Collection Plan Update/
+Final Report/
+Project Presentation/
+
 # Generated comparison outputs (can be regenerated from crawl data)
 compare_script/changes_summary.json
 compare_script/real_changes.json
