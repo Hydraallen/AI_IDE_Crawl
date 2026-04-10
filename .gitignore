@@ -2,6 +2,10 @@
 .DS_Store
 ._*
 
+# Secrets (keep locally, never commit)
+env
+env.local
+
 # Crawl data (180GB+ WARC/WACZ archives)
 crawls/
 
