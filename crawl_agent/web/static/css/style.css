@@ -1,0 +1,94 @@
+/* Minimal overrides — Tailwind handles most styling */
+
+.diff-added {
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.diff-removed {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 1px 4px;
+  border-radius: 3px;
+  text-decoration: line-through;
+}
+
+.similarity-bar {
+  height: 6px;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.tab-active {
+  border-bottom: 3px solid #6366f1;
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.tab-btn {
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: #6366f1;
+}
+
+.heatmap-cell {
+  transition: opacity 0.15s;
+  cursor: pointer;
+}
+.heatmap-cell:hover {
+  stroke: #6366f1;
+  stroke-width: 2;
+}
+
+.card {
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.screenshot-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.screenshot-container img {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+/* Markdown report styling */
+.report-content h1 { font-size: 1.5rem; font-weight: 700; margin: 1rem 0 0.5rem; }
+.report-content h2 { font-size: 1.25rem; font-weight: 600; margin: 1rem 0 0.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.25rem; }
+.report-content h3 { font-size: 1.1rem; font-weight: 600; margin: 0.75rem 0 0.25rem; }
+.report-content table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; }
+.report-content th, .report-content td { border: 1px solid #e5e7eb; padding: 6px 10px; text-align: left; font-size: 0.875rem; }
+.report-content th { background: #f9fafb; font-weight: 600; }
+.report-content code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; font-size: 0.85em; }
+.report-content pre { background: #f3f4f6; padding: 12px; border-radius: 6px; overflow-x: auto; }
+.report-content img { max-width: 100%; border-radius: 6px; }
+
+.search-result {
+  border-left: 3px solid #6366f1;
+  padding-left: 12px;
+  margin-bottom: 12px;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #6366f1;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

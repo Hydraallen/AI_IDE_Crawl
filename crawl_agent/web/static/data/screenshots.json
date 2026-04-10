@@ -1,0 +1,1614 @@
+{
+  "2026-03-16_vs_2026-03-15": [
+    {
+      "path": "2026-03-16_vs_2026-03-15/cursor.com/pricing_new.png",
+      "domain": "cursor.com",
+      "filename": "pricing_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/cursor.com/pricing_old.png",
+      "domain": "cursor.com",
+      "filename": "pricing_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_life_entertainment_sf-park-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_life_entertainment_sf-park-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_life_entertainment_your-watchlists_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_your-watchlists_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_life_entertainment_your-watchlists_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_your-watchlists_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_life_productivity_invites-page_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_life_productivity_invites-page_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_human-resources_guruqore_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_human-resources_guruqore_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_operations_course-platform_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_operations_course-platform_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_operations_support-bot-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_operations_support-bot-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_operations_vendor-management-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_operations_vendor-management-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_product-and-design_journey-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_product-and-design_journey-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_product-and-design_product-manager-crm_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-16_vs_2026-03-15/replit.com/gallery_work_product-and-design_product-manager-crm_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-17_vs_2026-03-16": [
+    {
+      "path": "2026-03-17_vs_2026-03-16/claude.com/connectors_gusto_new.png",
+      "domain": "claude.com",
+      "filename": "connectors_gusto_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/claude.com/connectors_gusto_old.png",
+      "domain": "claude.com",
+      "filename": "connectors_gusto_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/claude.com/product_claude-code_new.png",
+      "domain": "claude.com",
+      "filename": "product_claude-code_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/claude.com/product_claude-code_old.png",
+      "domain": "claude.com",
+      "filename": "product_claude-code_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_life_productivity_invites-page_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_life_productivity_invites-page_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_businesses_revenuecat-mobile-subscription_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_businesses_revenuecat-mobile-subscription_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_businesses_revenuecat-mobile-subscription_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_businesses_revenuecat-mobile-subscription_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_marketing-and-sales_revcrew-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_marketing-and-sales_revcrew-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_operations_course-platform_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_operations_course-platform_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_operations_support-bot-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_operations_support-bot-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_operations_vendor-management-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_operations_vendor-management-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_product-and-design_journey-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/gallery_work_product-and-design_journey-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/templates_new.png",
+      "domain": "replit.com",
+      "filename": "templates_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-17_vs_2026-03-16/replit.com/templates_old.png",
+      "domain": "replit.com",
+      "filename": "templates_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-18_vs_2026-03-17": [
+    {
+      "path": "2026-03-18_vs_2026-03-17/claude.com/download_new.png",
+      "domain": "claude.com",
+      "filename": "download_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/claude.com/download_old.png",
+      "domain": "claude.com",
+      "filename": "download_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_life_entertainment_sf-park-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_life_entertainment_sf-park-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_life_health-and-fitness_nutriplan_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_health-and-fitness_nutriplan_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_life_health-and-fitness_nutriplan_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_health-and-fitness_nutriplan_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_marketing-and-sales_revcrew-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_marketing-and-sales_revcrew-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_operations_customer-support-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_operations_customer-support-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_operations_legal-assistant_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_operations_legal-assistant_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_operations_support-bot-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_operations_support-bot-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_product-and-design_product-manager-crm_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/replit.com/gallery_work_product-and-design_product-manager-crm_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/support.claude.com/en_collections_10548294-video-tutorials_new.png",
+      "domain": "support.claude.com",
+      "filename": "en_collections_10548294-video-tutorials_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/support.claude.com/en_collections_10548294-video-tutorials_old.png",
+      "domain": "support.claude.com",
+      "filename": "en_collections_10548294-video-tutorials_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/support.claude.com/en_collections_13972013-claude-for-financial-services_new.png",
+      "domain": "support.claude.com",
+      "filename": "en_collections_13972013-claude-for-financial-services_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-18_vs_2026-03-17/support.claude.com/en_collections_13972013-claude-for-financial-services_old.png",
+      "domain": "support.claude.com",
+      "filename": "en_collections_13972013-claude-for-financial-services_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-19_vs_2026-03-18": [
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_life_entertainment_sf-park-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_life_entertainment_sf-park-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_life_health-and-fitness_nutriplan_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_health-and-fitness_nutriplan_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_life_health-and-fitness_nutriplan_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_health-and-fitness_nutriplan_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_life_productivity_event-rsvp-template_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_event-rsvp-template_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_life_productivity_event-rsvp-template_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_event-rsvp-template_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_marketing-and-sales_crm_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_crm_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_marketing-and-sales_crm_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_crm_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_marketing-and-sales_revcrew-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_marketing-and-sales_revcrew-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_course-platform_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_course-platform_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_customer-support-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_customer-support-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_legal-assistant_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_legal-assistant_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_support-bot-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_operations_support-bot-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_product-and-design_journey-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-19_vs_2026-03-18/replit.com/gallery_work_product-and-design_journey-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-20_vs_2026-03-19": [
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/cli_index_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "cli_index_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/cli_index_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "cli_index_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/cli_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "cli_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/cli_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "cli_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/cli_security_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "cli_security_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/cli_security_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "cli_security_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/install_docker_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "install_docker_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/install_docker_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "install_docker_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/install_index_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "install_index_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/install_index_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "install_index_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/install_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "install_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/docs.openclaw.ai/install_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "install_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_marketing-and-sales_revcrew-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_marketing-and-sales_revcrew-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_operations_course-platform_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_operations_course-platform_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_operations_customer-support-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_operations_customer-support-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_product-and-design_product-manager-crm_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-20_vs_2026-03-19/replit.com/gallery_work_product-and-design_product-manager-crm_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-21_vs_2026-03-20": [
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_architecture_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_architecture_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_architecture_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_architecture_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_bundles_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_bundles_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_bundles_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_bundles_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_community_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_community_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_community_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_community_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_manifest_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_manifest_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/plugins_manifest_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "plugins_manifest_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_exec_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_exec_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_exec_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_exec_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_index_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_index_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_index_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_index_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_lobster_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_lobster_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_lobster_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_lobster_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_pdf_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_pdf_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_pdf_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_pdf_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_plugin_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_plugin_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_plugin_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_plugin_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_thinking_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_thinking_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-21_vs_2026-03-20/docs.openclaw.ai/tools_thinking_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_thinking_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-22_vs_2026-03-21": [
+    {
+      "path": "2026-03-22_vs_2026-03-21/claude.com/community_new.png",
+      "domain": "claude.com",
+      "filename": "community_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/claude.com/community_old.png",
+      "domain": "claude.com",
+      "filename": "community_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/docs.openclaw.ai/tools_browser-linux-troubleshooting_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_browser-linux-troubleshooting_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/docs.openclaw.ai/tools_browser-linux-troubleshooting_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_browser-linux-troubleshooting_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/docs.openclaw.ai/tools_pdf_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_pdf_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/docs.openclaw.ai/tools_pdf_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_pdf_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/docs.openclaw.ai/tools_slash-commands_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_slash-commands_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/docs.openclaw.ai/tools_slash-commands_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "tools_slash-commands_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/gallery_work_human-resources_guruqore_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/gallery_work_human-resources_guruqore_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/gallery_work_marketing-and-sales_revcrew-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/gallery_work_marketing-and-sales_revcrew-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/gallery_work_operations_support-bot-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/gallery_work_operations_support-bot-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_support-bot-ai_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/templates_new.png",
+      "domain": "replit.com",
+      "filename": "templates_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-22_vs_2026-03-21/replit.com/templates_old.png",
+      "domain": "replit.com",
+      "filename": "templates_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-25_vs_2026-03-24": [
+    {
+      "path": "2026-03-25_vs_2026-03-24/claude.com/community_new.png",
+      "domain": "claude.com",
+      "filename": "community_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/claude.com/community_old.png",
+      "domain": "claude.com",
+      "filename": "community_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/replit.com/gallery_life_education_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_education_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/replit.com/gallery_life_education_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_education_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/replit.com/gallery_life_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/replit.com/gallery_life_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/replit.com/gallery_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/replit.com/gallery_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/support.claude.com/en_articles_12138966-release-notes_new.png",
+      "domain": "support.claude.com",
+      "filename": "en_articles_12138966-release-notes_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-25_vs_2026-03-24/support.claude.com/en_articles_12138966-release-notes_old.png",
+      "domain": "support.claude.com",
+      "filename": "en_articles_12138966-release-notes_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-28_vs_2026-03-27": [
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_company_new.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_company_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_company_old.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_company_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_customers_new.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_customers_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_customers_old.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_customers_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_ideas_new.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_ideas_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_ideas_old.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_ideas_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_press_new.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_press_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/blog_topic_press_old.png",
+      "domain": "cursor.com",
+      "filename": "blog_topic_press_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/marketplace_new.png",
+      "domain": "cursor.com",
+      "filename": "marketplace_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/cursor.com/marketplace_old.png",
+      "domain": "cursor.com",
+      "filename": "marketplace_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/luma.com/windsurf_new.png",
+      "domain": "luma.com",
+      "filename": "windsurf_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/luma.com/windsurf_old.png",
+      "domain": "luma.com",
+      "filename": "windsurf_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/replit.com/gallery_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/replit.com/gallery_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/replit.com/mobile-apps_old.png",
+      "domain": "replit.com",
+      "filename": "mobile-apps_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/windsurf.com/changelog_jetbrains_new.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_jetbrains_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-28_vs_2026-03-27/windsurf.com/changelog_jetbrains_old.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_jetbrains_old",
+      "type": "old"
+    }
+  ],
+  "2026-03-31_vs_2026-03-30": [
+    {
+      "path": "2026-03-31_vs_2026-03-30/cursor.com/workshops_new.png",
+      "domain": "cursor.com",
+      "filename": "workshops_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/cursor.com/workshops_old.png",
+      "domain": "cursor.com",
+      "filename": "workshops_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/platform.claude.com/cookbook_new.png",
+      "domain": "platform.claude.com",
+      "filename": "cookbook_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/platform.claude.com/cookbook_old.png",
+      "domain": "platform.claude.com",
+      "filename": "cookbook_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_life_entertainment_sf-park-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_life_entertainment_sf-park-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_sf-park-mapper_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_life_entertainment_your-watchlists_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_your-watchlists_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_life_entertainment_your-watchlists_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_your-watchlists_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_life_productivity_invites-page_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_life_productivity_invites-page_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_human-resources_guruqore_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_human-resources_guruqore_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_operations_customer-support-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_operations_customer-support-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_operations_legal-assistant_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_operations_legal-assistant_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_operations_vendor-management-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_operations_vendor-management-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_product-and-design_product-manager-crm_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-03-31_vs_2026-03-30/replit.com/gallery_work_product-and-design_product-manager-crm_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_product-manager-crm_old",
+      "type": "old"
+    }
+  ],
+  "2026-04-01_vs_2026-03-31": [
+    {
+      "path": "2026-04-01_vs_2026-03-31/bolt.new/_root_new.png",
+      "domain": "bolt.new",
+      "filename": "_root_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/bolt.new/_root_old.png",
+      "domain": "bolt.new",
+      "filename": "_root_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/claude.com/blog_claude-builds-visuals_new.png",
+      "domain": "claude.com",
+      "filename": "blog_claude-builds-visuals_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/claude.com/blog_claude-builds-visuals_old.png",
+      "domain": "claude.com",
+      "filename": "blog_claude-builds-visuals_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_life_education_solar-system-visualizer_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_education_solar-system-visualizer_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_life_education_solar-system-visualizer_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_education_solar-system-visualizer_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_life_entertainment_your-watchlists_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_your-watchlists_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_life_entertainment_your-watchlists_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_your-watchlists_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_life_productivity_invites-page_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_life_productivity_invites-page_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_productivity_invites-page_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_course-platform_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_course-platform_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_course-platform_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_customer-support-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_customer-support-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_customer-support-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_legal-assistant_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_legal-assistant_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_legal-assistant_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_vendor-management-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_operations_vendor-management-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_product-and-design_journey-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-01_vs_2026-03-31/replit.com/gallery_work_product-and-design_journey-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_old",
+      "type": "old"
+    }
+  ],
+  "2026-04-02_vs_2026-04-01": [
+    {
+      "path": "2026-04-02_vs_2026-04-01/cursor.com/glass_new.png",
+      "domain": "cursor.com",
+      "filename": "glass_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-02_vs_2026-04-01/cursor.com/glass_old.png",
+      "domain": "cursor.com",
+      "filename": "glass_old",
+      "type": "old"
+    }
+  ],
+  "2026-04-03_vs_2026-04-02": [
+    {
+      "path": "2026-04-03_vs_2026-04-02/cursor.com/changelog_new.png",
+      "domain": "cursor.com",
+      "filename": "changelog_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-03_vs_2026-04-02/cursor.com/changelog_old.png",
+      "domain": "cursor.com",
+      "filename": "changelog_old",
+      "type": "old"
+    }
+  ],
+  "2026-04-04_vs_2026-04-03": [
+    {
+      "path": "2026-04-04_vs_2026-04-03/claude.com/blog_android-app_old.png",
+      "domain": "claude.com",
+      "filename": "blog_android-app_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/claude.com/blog_claude-builds-visuals_new.png",
+      "domain": "claude.com",
+      "filename": "blog_claude-builds-visuals_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/claude.com/blog_claude-code-remote-mcp_old.png",
+      "domain": "claude.com",
+      "filename": "blog_claude-code-remote-mcp_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/claude.com/blog_claude-on-google-cloud-fedramp-high_new.png",
+      "domain": "claude.com",
+      "filename": "blog_claude-on-google-cloud-fedramp-high_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/claude.com/blog_claude-on-google-cloud-fedramp-high_old.png",
+      "domain": "claude.com",
+      "filename": "blog_claude-on-google-cloud-fedramp-high_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/claude.com/blog_claude-team-updates_new.png",
+      "domain": "claude.com",
+      "filename": "blog_claude-team-updates_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/claude.com/blog_web-search_old.png",
+      "domain": "claude.com",
+      "filename": "blog_web-search_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/replit.com/gallery_life_health-and-fitness_nutriplan_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_health-and-fitness_nutriplan_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/replit.com/gallery_life_health-and-fitness_nutriplan_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_health-and-fitness_nutriplan_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/replit.com/gallery_work_marketing-and-sales_revcrew-ai_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-04_vs_2026-04-03/replit.com/gallery_work_marketing-and-sales_revcrew-ai_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_revcrew-ai_old",
+      "type": "old"
+    }
+  ],
+  "2026-04-05_vs_2026-04-04": [
+    {
+      "path": "2026-04-05_vs_2026-04-04/claude.com/community_new.png",
+      "domain": "claude.com",
+      "filename": "community_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/claude.com/community_old.png",
+      "domain": "claude.com",
+      "filename": "community_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/gallery_life_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/gallery_life_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/gallery_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/gallery_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/gallery_work_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/gallery_work_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/templates_new.png",
+      "domain": "replit.com",
+      "filename": "templates_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-05_vs_2026-04-04/replit.com/templates_old.png",
+      "domain": "replit.com",
+      "filename": "templates_old",
+      "type": "old"
+    }
+  ],
+  "2026-04-06_vs_2026-04-05": [
+    {
+      "path": "2026-04-06_vs_2026-04-05/claude.com/community_new.png",
+      "domain": "claude.com",
+      "filename": "community_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/claude.com/community_old.png",
+      "domain": "claude.com",
+      "filename": "community_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/concepts_models_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "concepts_models_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/concepts_models_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "concepts_models_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_index_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_index_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_index_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_index_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_minimax_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_minimax_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_minimax_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_minimax_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_vercel-ai-gateway_new.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_vercel-ai-gateway_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/docs.openclaw.ai/providers_vercel-ai-gateway_old.png",
+      "domain": "docs.openclaw.ai",
+      "filename": "providers_vercel-ai-gateway_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/replit.com/gallery_life_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/replit.com/gallery_life_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/replit.com/gallery_work_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/replit.com/gallery_work_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-06_vs_2026-04-05/replit.com/templates_new.png",
+      "domain": "replit.com",
+      "filename": "templates_new",
+      "type": "new"
+    }
+  ],
+  "2026-04-07_vs_2026-04-06": [
+    {
+      "path": "2026-04-07_vs_2026-04-06/claude.com/community_new.png",
+      "domain": "claude.com",
+      "filename": "community_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/claude.com/community_old.png",
+      "domain": "claude.com",
+      "filename": "community_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_life_entertainment_cube-slide_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_cube-slide_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_life_entertainment_cube-slide_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_life_entertainment_cube-slide_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_human-resources_guruqore_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_human-resources_guruqore_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_human-resources_guruqore_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_marketing-and-sales_ad-creative-generator-ai-marketing-tool_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_ad-creative-generator-ai-marketing-tool_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_marketing-and-sales_ad-creative-generator-ai-marketing-tool_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_marketing-and-sales_ad-creative-generator-ai-marketing-tool_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_operations_vendor-management-portal_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_operations_vendor-management-portal_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_operations_vendor-management-portal_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_product-and-design_journey-mapper_new.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/replit.com/gallery_work_product-and-design_journey-mapper_old.png",
+      "domain": "replit.com",
+      "filename": "gallery_work_product-and-design_journey-mapper_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/windsurf.com/changelog_jetbrains_new.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_jetbrains_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/windsurf.com/changelog_jetbrains_old.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_jetbrains_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/windsurf.com/changelog_new.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/windsurf.com/changelog_old.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_old",
+      "type": "old"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/windsurf.com/changelog_windsurf-next_new.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_windsurf-next_new",
+      "type": "new"
+    },
+    {
+      "path": "2026-04-07_vs_2026-04-06/windsurf.com/changelog_windsurf-next_old.png",
+      "domain": "windsurf.com",
+      "filename": "changelog_windsurf-next_old",
+      "type": "old"
+    }
+  ]
+}

@@ -23,6 +23,11 @@ def main() -> None:
 
     subparsers.add_parser("agent", help="Interactive agent mode")
 
+    viz_parser = subparsers.add_parser("visualize", help="Start visualization web server")
+    viz_parser.add_argument("--build-data", action="store_true", help="Rebuild JSON data before starting")
+    viz_parser.add_argument("--port", type=int, default=5000, help="Port (default: 5000)")
+    viz_parser.add_argument("--no-browser", action="store_true", help="Don't open browser automatically")
+
     args = parser.parse_args()
 
     if args.command == "batch":
@@ -37,6 +42,18 @@ def main() -> None:
     elif args.command == "agent":
         from crawl_agent.agent import run_agent
         run_agent()
+    elif args.command == "visualize":
+        from crawl_agent.web.data_builder import build_all_data
+        from crawl_agent.web.app import run_server
+
+        if args.build_data:
+            build_all_data()
+
+        if not args.no_browser:
+            import webbrowser
+            webbrowser.open(f"http://localhost:{args.port}")
+
+        run_server(port=args.port, debug=False)
     else:
         parser.print_help()
         sys.exit(1)

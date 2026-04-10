@@ -206,3 +206,141 @@ python crawl_agent/main.py agent                               # 交互模式
 2. **单对测试**：`python crawl_agent/main.py batch --start-date 2026-03-15 --end-date 2026-03-16 --force`，检查生成的 `reports/2026-03-16_vs_2026-03-15.md` 包含所有必需 section
 3. **交互测试**：`python crawl_agent/main.py agent`，输入 "what changed on Cursor between March 15 and March 16?"，验证 Agent 正确调用 `compare_dates` 或 `get_domain_changes` tool
 4. **Rate limit 测试**：连续处理 3 个日期对，确认不触发 API 限流
+
+---
+
+## Phase 2: Visualization Frontend
+
+### Context
+
+Agent 已生成 22 份每日比较报告（`reports/*.md`）+ 168MB 截图（`reports/screenshots/`），但只能通过读原始文件查看。需要一个 Web 前端，以交互方式展示 25 天内 9 个 AI 编码工具网站的变化演变，适用于 AI Coding Tools 课程项目展示。
+
+### Python 环境
+
+**所有 Python 操作必须使用项目根目录 `.venv`：**
+
+```bash
+/Volumes/EDITH/AI Coding Tools_Project/.venv/bin/python   # 运行脚本
+/Volumes/EDITH/AI Coding Tools_Project/.venv/bin/pip       # 安装依赖
+```
+
+### Tech Stack
+
+- **Backend**: Flask（已在 `.venv` 中安装）
+- **Frontend**: Vanilla JS + Chart.js (CDN) + Tailwind CSS (CDN)
+- **Data**: 构建时预生成 JSON，Flask 作为静态文件服务
+
+### Architecture
+
+```
+crawl_agent/
+    web/                        # NEW: 可视化模块
+        __init__.py
+        app.py                  # Flask app + API routes
+        data_builder.py         # 预构建 JSON 数据
+        templates/
+            index.html          # 单页应用（4 个 tab）
+        static/
+            style.css           # 样式覆盖
+            data/               # 预构建 JSON 数据
+                overview.json
+                timeline.json
+                changes.json
+```
+
+### API Routes
+
+| Route | Returns |
+|-------|---------|
+| `/` | 主页面 |
+| `/api/dates` | 可用日期 + 日期对列表 |
+| `/api/overview` | 聚合统计数据 |
+| `/api/compare/<old>/<new>` | 单个日期对的比较数据 |
+| `/api/trend/<domain>` | 单个域名的时间序列数据 |
+| `/api/report/<old>/<new>` | 解析后的 markdown 报告 HTML |
+| `/api/screenshots/<path>` | 截图 PNG 文件 |
+
+### Page Layout (4 个 Tab)
+
+**Tab 1: Overview Dashboard**
+- 时间线折线图（Chart.js）：X=日期, Y=每域名变化数（stacked area）
+- 域名分布饼图：哪个域名变化最多
+- 关键指标卡片：总爬取 URL 数、总变化数、日均变化、最活跃域名
+- 热力图：域名 × 日期矩阵，颜色深浅表示变化强度
+
+**Tab 2: Daily Comparison Browser**
+- 日期对选择器（下拉 / 时间线滑块）
+- 统计对比：Added / Removed / Changed / Unchanged
+- 变化卡片：域名标签 + 页面标题 + URL + 相似度色条 + 可展开 diff（增绿删红）
+- 前后截图对比（如有）
+
+**Tab 3: Domain Deep Dive**
+- 域名选择器（9 个工具的按钮）
+- 变化时间线柱状图
+- 该域名下所有变化的 URL 表格
+
+**Tab 4: Search**
+- 关键词搜索，跨所有变化
+- 结果列表：日期对 + URL + 上下文片段
+
+### Implementation Steps
+
+#### Step 1: `crawl_agent/web/data_builder.py`
+
+- 扫描 `reports/` 中的 markdown 文件
+- 调用 `warc_loader.compare_two_dates()` 获取所有日期对数据
+- 聚合输出：
+  - `overview.json`：统计摘要、域名总量、时间线数据
+  - `timeline.json`：每域名每日变化数
+  - `changes.json`：所有 text_changes，按日期对索引
+- 写入 `crawl_agent/web/static/data/`
+- **复用**：`warc_loader.compare_two_dates()`, `config.get_consecutive_pairs()`, `config.get_available_dates()`
+
+#### Step 2: `crawl_agent/web/app.py`
+
+- Flask app + 上述路由
+- 截图通过 `send_from_directory(REPORTS_DIR / "screenshots")` 提供
+- Markdown 报告通过 `markdown` 库转 HTML
+- 预构建 JSON 从 `static/data/` 提供
+
+#### Step 3: `crawl_agent/web/templates/index.html`
+
+- 单页应用，4 个 tab（vanilla JS）
+- Chart.js (CDN) 画图
+- Tailwind CSS (CDN) 样式
+- Diff 渲染：内联彩色 span
+- 截图对比：并排展示
+
+#### Step 4: CLI 集成
+
+- 在 `crawl_agent/main.py` 添加 `visualize` 子命令
+- `.venv/bin/python -m crawl_agent.main visualize` → 启动 Flask
+- `--build-data` 标志：重新生成 JSON 数据
+- `--port` 标志：指定端口
+
+### Dependencies
+
+- `flask` — 已在 `.venv` 中安装
+- `markdown` — `.venv/bin/pip install markdown`
+- `chart.js` — CDN 引入，无需安装
+
+### Files to Create
+
+- `crawl_agent/web/__init__.py`
+- `crawl_agent/web/app.py`
+- `crawl_agent/web/data_builder.py`
+- `crawl_agent/web/templates/index.html`
+- `crawl_agent/web/static/style.css`
+
+### Files to Modify
+
+- `crawl_agent/main.py` — 添加 `visualize` 子命令
+
+### Verification
+
+1. `.venv/bin/pip install markdown`
+2. `.venv/bin/python -m crawl_agent.main visualize --build-data` — 构建 JSON
+3. 打开 `http://localhost:5000` — 看到 Overview Dashboard + 图表
+4. 切换到 Daily Comparison — 选择日期对，看到变化卡片和截图
+5. 切换到 Domain Deep Dive — 选择域名，看到时间线和所有变化
+6. 搜索 "pricing" — 找到 Cursor 定价变化

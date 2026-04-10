@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Coding Tools — Web Archive Visualization</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .domain-pill { cursor: pointer; transition: all 0.15s; }
+    .domain-pill.active { background: #6366f1; color: white; }
+    .domain-pill:not(.active):hover { background: #e0e7ff; }
+    [data-tab] { display: none; }
+    [data-tab].active { display: block; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-xl font-bold text-indigo-600">AI Coding Tools Evolution</h1>
+      <span class="text-sm text-gray-500">AI Coding Tools -- Web Archive</span>
+    </div>
+    <!-- Tab navigation -->
+    <nav class="max-w-7xl mx-auto px-4 flex gap-1">
+      <button class="tab-btn tab-active px-4 py-2 text-sm" onclick="switchTab('overview')">Overview</button>
+      <button class="tab-btn px-4 py-2 text-sm" onclick="switchTab('daily')">Daily Comparison</button>
+      <button class="tab-btn px-4 py-2 text-sm" onclick="switchTab('domain')">Domain Deep Dive</button>
+      <button class="tab-btn px-4 py-2 text-sm" onclick="switchTab('search')">Search</button>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6">
+
+    <!-- ==================== TAB 1: Overview ==================== -->
+    <div data-tab="overview" class="active">
+      <!-- Metric cards -->
+      <div id="metric-cards" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <!-- Timeline chart -->
+        <div class="lg:col-span-2 bg-white rounded-lg shadow p-4" style="max-height:340px;overflow:hidden;">
+          <h3 class="text-sm font-semibold text-gray-600 mb-3">Changes Over Time (by Domain)</h3>
+          <div style="position:relative; width:100%; height:280px;"><canvas id="timelineChart"></canvas></div>
+        </div>
+        <!-- Pie chart -->
+        <div class="bg-white rounded-lg shadow p-4" style="max-height:340px;overflow:hidden;">
+          <h3 class="text-sm font-semibold text-gray-600 mb-3">Change Distribution by Domain</h3>
+          <div style="position:relative; width:100%; height:280px;"><canvas id="pieChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Heatmap -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <h3 class="text-sm font-semibold text-gray-600 mb-3">Domain × Date Heatmap</h3>
+        <div id="heatmap" class="overflow-x-auto"></div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: Daily Comparison ==================== -->
+    <div data-tab="daily">
+      <!-- Date pair selector -->
+      <div class="bg-white rounded-lg shadow p-4 mb-6">
+        <div class="flex items-center gap-4 flex-wrap">
+          <label class="text-sm font-semibold text-gray-600">Select Date Pair:</label>
+          <select id="datePairSelect" class="border rounded-lg px-3 py-2 text-sm" onchange="loadDailyComparison()">
+          </select>
+          <button id="showReportBtn" class="ml-auto text-sm text-indigo-600 hover:underline" onclick="toggleReport()">Show Full Report</button>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div id="dailyStats" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"></div>
+
+      <!-- Report panel (hidden by default) -->
+      <div id="reportPanel" class="hidden bg-white rounded-lg shadow p-6 mb-6">
+        <div id="reportContent" class="report-content"></div>
+      </div>
+
+      <!-- Change cards -->
+      <div id="changeCards" class="space-y-4"></div>
+    </div>
+
+    <!-- ==================== TAB 3: Domain Deep Dive ==================== -->
+    <div data-tab="domain">
+      <!-- Domain selector -->
+      <div class="bg-white rounded-lg shadow p-4 mb-6">
+        <div class="flex flex-wrap gap-2" id="domainPills"></div>
+      </div>
+
+      <!-- Domain stats -->
+      <div id="domainStats" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6"></div>
+
+      <!-- Domain timeline -->
+      <div class="bg-white rounded-lg shadow p-4 mb-6">
+        <h3 class="text-sm font-semibold text-gray-600 mb-3">Changes Over Time</h3>
+        <div style="position:relative; width:100%; height:200px;"><canvas id="domainTimelineChart"></canvas></div>
+      </div>
+
+      <!-- Domain changes table -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <h3 class="text-sm font-semibold text-gray-600 mb-3">All Changes</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm" id="domainTable">
+            <thead>
+              <tr class="border-b text-left text-gray-500">
+                <th class="py-2 px-3">Date</th>
+                <th class="py-2 px-3">URL</th>
+                <th class="py-2 px-3">Similarity</th>
+                <th class="py-2 px-3">Size Δ</th>
+              </tr>
+            </thead>
+            <tbody id="domainTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: Search ==================== -->
+    <div data-tab="search">
+      <div class="bg-white rounded-lg shadow p-4 mb-6">
+        <div class="flex gap-3">
+          <input type="text" id="searchInput" placeholder="Search changes (e.g., pricing, cursor, feature)..."
+            class="flex-1 border rounded-lg px-4 py-2 text-sm" onkeydown="if(event.key==='Enter')doSearch()">
+          <button onclick="doSearch()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm hover:bg-indigo-700">Search</button>
+        </div>
+      </div>
+      <div id="searchResults" class="space-y-3"></div>
+    </div>
+
+  </main>
+
+  <footer class="text-center text-xs text-gray-400 py-6">
+    AI Coding Tools -- Web Archive &mdash; The 2026 AI Coding Assistant Evolution
+  </footer>
+
+<script>
+// ========== State ==========
+let overviewData = null;
+let timelineData = null;
+let changesData = null;
+let statsData = null;
+let datesData = null;
+let screenshotsMap = null;
+
+let timelineChart = null;
+let pieChart = null;
+let domainTimelineChart = null;
+let selectedDomain = null;
+let reportVisible = false;
+
+const DOMAIN_COLORS = {
+  cursor: '#6366f1', windsurf: '#8b5cf6', github: '#333',
+  antigravity: '#ec4899', trae: '#f59e0b', openclaw: '#10b981',
+  bolt: '#ef4444', replit: '#3b82f6', claude: '#d97706',
+};
+const DOMAIN_LABELS = {
+  cursor: 'Cursor', windsurf: 'Windsurf', github: 'GitHub Copilot',
+  antigravity: 'Antigravity', trae: 'Trae', openclaw: 'OpenClaw',
+  bolt: 'Bolt.new', replit: 'Replit', claude: 'Claude',
+};
+
+// ========== Init ==========
+async function init() {
+  const [ov, tl, ch, st, dt, ss] = await Promise.all([
+    fetch('/api/overview').then(r => r.json()),
+    fetch('/api/timeline').then(r => r.json()),
+    fetch('/api/changes').then(r => r.json()),
+    fetch('/api/stats').then(r => r.json()),
+    fetch('/api/dates').then(r => r.json()),
+    fetch('/api/screenshots-map').then(r => r.json()),
+  ]);
+  overviewData = ov;
+  timelineData = tl;
+  changesData = ch;
+  statsData = st;
+  datesData = dt;
+  screenshotsMap = ss;
+
+  renderOverview();
+  populateDateSelector();
+  populateDomainPills();
+}
+
+// ========== Tab switching ==========
+function switchTab(name) {
+  document.querySelectorAll('[data-tab]').forEach(el => el.classList.remove('active'));
+  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('tab-active');
+    if (btn.textContent.toLowerCase().includes(name.substring(0, 4))) {
+      btn.classList.add('tab-active');
+    }
+  });
+}
+
+// ========== TAB 1: Overview ==========
+function renderOverview() {
+  // Metric cards
+  const cards = [
+    { label: 'Total Days', value: overviewData.dates?.length || 0, sub: `${overviewData.total_pairs} comparisons` },
+    { label: 'Total Text Changes', value: overviewData.total_text_changes, sub: `${overviewData.avg_changes_per_day}/day avg` },
+    { label: 'Most Active', value: DOMAIN_LABELS[overviewData.most_active_domain] || overviewData.most_active_domain, sub: `${overviewData.domain_totals[overviewData.most_active_domain] || 0} changes` },
+    { label: 'URLs Added/Removed', value: `+${overviewData.total_added} / -${overviewData.total_removed}`, sub: `${overviewData.total_changed} changed` },
+  ];
+  document.getElementById('metric-cards').innerHTML = cards.map(c => `
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="text-xs text-gray-500 uppercase tracking-wide">${c.label}</div>
+      <div class="text-2xl font-bold mt-1">${c.value}</div>
+      <div class="text-xs text-gray-400 mt-1">${c.sub}</div>
+    </div>
+  `).join('');
+
+  renderTimelineChart();
+  renderPieChart();
+  renderHeatmap();
+}
+
+function renderTimelineChart() {
+  const ctx = document.getElementById('timelineChart').getContext('2d');
+  if (timelineChart) timelineChart.destroy();
+
+  const datasets = Object.entries(timelineData.domains || {}).map(([key, counts]) => ({
+    label: DOMAIN_LABELS[key] || key,
+    data: counts,
+    backgroundColor: (DOMAIN_COLORS[key] || '#999') + '40',
+    borderColor: DOMAIN_COLORS[key] || '#999',
+    borderWidth: 1.5,
+    fill: true,
+    tension: 0.3,
+  }));
+
+  timelineChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: timelineData.dates || [], datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
+      scales: {
+        x: { ticks: { maxRotation: 45, font: { size: 10 } } },
+        y: { beginAtZero: true, title: { display: true, text: 'Changes' } },
+      },
+    },
+  });
+}
+
+function renderPieChart() {
+  const ctx = document.getElementById('pieChart').getContext('2d');
+  if (pieChart) pieChart.destroy();
+
+  const totals = overviewData.domain_totals || {};
+  const labels = Object.keys(totals).map(k => DOMAIN_LABELS[k] || k);
+  const data = Object.values(totals);
+  const colors = Object.keys(totals).map(k => DOMAIN_COLORS[k] || '#999');
+
+  pieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: colors }] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
+    },
+  });
+}
+
+function renderHeatmap() {
+  const container = document.getElementById('heatmap');
+  if (!timelineData || !overviewData) return;
+
+  const domains = Object.keys(timelineData.domains || {});
+  const dates = timelineData.dates || [];
+
+  if (!domains.length || !dates.length) {
+    container.innerHTML = '<p class="text-gray-400 text-sm">No data available</p>';
+    return;
+  }
+
+  // Find max for color scaling
+  let maxVal = 0;
+  domains.forEach(d => {
+    (timelineData.domains[d] || []).forEach(v => { if (v > maxVal) maxVal = v; });
+  });
+  if (maxVal === 0) maxVal = 1;
+
+  const cellSize = 28;
+  const labelW = 100;
+  const dateH = 80;
+  const w = labelW + dates.length * cellSize;
+  const h = dateH + domains.length * cellSize;
+
+  let svg = `<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">`;
+
+  // Date labels (rotated)
+  dates.forEach((d, i) => {
+    const x = labelW + i * cellSize + cellSize / 2;
+    svg += `<text x="${x}" y="${dateH - 5}" transform="rotate(-45 ${x} ${dateH - 5})" text-anchor="end" font-size="9" fill="#6b7280">${d.substring(5)}</text>`;
+  });
+
+  // Domain rows
+  domains.forEach((domain, ri) => {
+    const y = dateH + ri * cellSize;
+    svg += `<text x="${labelW - 6}" y="${y + cellSize / 2 + 4}" text-anchor="end" font-size="10" fill="#374151">${DOMAIN_LABELS[domain] || domain}</text>`;
+
+    const counts = timelineData.domains[domain] || [];
+    counts.forEach((count, ci) => {
+      const x = labelW + ci * cellSize;
+      const opacity = count / maxVal;
+      const color = DOMAIN_COLORS[domain] || '#6366f1';
+      svg += `<rect class="heatmap-cell" x="${x + 1}" y="${y + 1}" width="${cellSize - 2}" height="${cellSize - 2}" rx="3" fill="${color}" opacity="${Math.max(0.08, opacity)}" data-count="${count}" data-domain="${domain}" data-date="${dates[ci]}" onclick="heatmapClick('${domain}','${dates[ci]}')" />`;
+      if (count > 0) {
+        svg += `<text x="${x + cellSize / 2}" y="${y + cellSize / 2 + 3}" text-anchor="middle" font-size="9" fill="${opacity > 0.5 ? 'white' : '#374151'}">${count}</text>`;
+      }
+    });
+  });
+
+  svg += '</svg>';
+  container.innerHTML = svg;
+}
+
+function heatmapClick(domain, date) {
+  switchTab('daily');
+  // Find the pair that includes this date as the "new" date
+  const pair = datesData?.pairs?.find(p => p.new_display === date);
+  if (pair) {
+    document.getElementById('datePairSelect').value = `${pair.old}_${pair.new}`;
+    loadDailyComparison();
+  }
+}
+
+// ========== TAB 2: Daily Comparison ==========
+function populateDateSelector() {
+  const sel = document.getElementById('datePairSelect');
+  sel.innerHTML = '';
+  (datesData?.pairs || []).forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = `${p.old}_${p.new}`;
+    opt.textContent = p.label;
+    sel.appendChild(opt);
+  });
+  // Select most recent by default
+  if (datesData?.pairs?.length) {
+    sel.value = `${datesData.pairs[datesData.pairs.length - 1].old}_${datesData.pairs[datesData.pairs.length - 1].new}`;
+  }
+  loadDailyComparison();
+}
+
+async function loadDailyComparison() {
+  const pairKey = document.getElementById('datePairSelect').value;
+  if (!pairKey) return;
+
+  const [old_d, new_d] = pairKey.split('_');
+  const stats = statsData?.[pairKey] || {};
+  const changes = changesData?.[pairKey] || [];
+
+  // Stats cards
+  const cards = [
+    { label: 'Added', value: stats.added_count || 0, color: 'text-green-600' },
+    { label: 'Removed', value: stats.removed_count || 0, color: 'text-red-600' },
+    { label: 'Changed', value: stats.changed_count || 0, color: 'text-amber-600' },
+    { label: 'Unchanged', value: stats.unchanged_count || 0, color: 'text-gray-400' },
+  ];
+  document.getElementById('dailyStats').innerHTML = cards.map(c => `
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="text-xs text-gray-500 uppercase">${c.label}</div>
+      <div class="text-xl font-bold ${c.color}">${c.value.toLocaleString()}</div>
+    </div>
+  `).join('');
+
+  // Hide report when switching
+  reportVisible = false;
+  document.getElementById('reportPanel').classList.add('hidden');
+
+  // Change cards
+  const container = document.getElementById('changeCards');
+  if (!changes.length) {
+    container.innerHTML = '<p class="text-gray-400 text-sm">No text changes detected for this pair.</p>';
+    return;
+  }
+
+  // Find screenshots for this pair
+  const pairDisplay = datesData?.pairs?.find(p => `${p.old}_${p.new}` === pairKey);
+  const pairLabel = pairDisplay ? `${pairDisplay.new_display}_vs_${pairDisplay.old_display}` : '';
+  const pairShots = screenshotsMap?.[pairLabel] || [];
+  const shotsByUrl = {};
+  pairShots.forEach(s => {
+    const domain = s.domain.replace(/_/g, '.');
+    const baseName = s.filename.replace(/_(old|new)$/, '');
+    const key = `${domain}/${baseName}`;
+    if (!shotsByUrl[key]) shotsByUrl[key] = {};
+    shotsByUrl[key][s.type] = `/api/screenshots/${s.path}`;
+  });
+
+  container.innerHTML = changes.map((c, i) => {
+    const simColor = c.similarity < 0.5 ? '#ef4444' : c.similarity < 0.8 ? '#f59e0b' : '#10b981';
+    const simPct = Math.round(c.similarity * 100);
+    const domain = c.domain || '';
+    const domainKey = c.domain_key || '';
+    const shots = findScreenshots(c.url, shotsByUrl);
+
+    return `
+    <div class="card bg-white rounded-lg shadow p-4">
+      <div class="flex items-start justify-between gap-3 mb-2">
+        <div class="flex-1 min-w-0">
+          <span class="inline-block text-xs font-medium px-2 py-0.5 rounded-full text-white" style="background:${DOMAIN_COLORS[domainKey] || '#6366f1'}">${DOMAIN_LABELS[domainKey] || domain}</span>
+          <h4 class="text-sm font-semibold mt-1 truncate">${c.title || 'Untitled'}</h4>
+          <a href="${c.url}" target="_blank" class="text-xs text-indigo-500 hover:underline truncate block">${c.url}</a>
+        </div>
+        <div class="text-right shrink-0">
+          <div class="text-xs text-gray-500">Similarity</div>
+          <div class="text-lg font-bold" style="color:${simColor}">${simPct}%</div>
+          <div class="w-16 bg-gray-200 rounded-full h-1.5 mt-1">
+            <div class="similarity-bar rounded-full" style="width:${simPct}%;background:${simColor}"></div>
+          </div>
+        </div>
+      </div>
+
+      ${shots ? `
+      <div class="mt-3">
+        <button class="text-xs text-indigo-600 hover:underline" onclick="toggleScreenshots(this)">Show Screenshots</button>
+        <div class="screenshot-container hidden mt-2">
+          ${shots.old ? `<div><div class="text-xs text-gray-400 mb-1">Before</div><img src="${shots.old}" alt="Before" loading="lazy"></div>` : ''}
+          ${shots.new ? `<div><div class="text-xs text-gray-400 mb-1">After</div><img src="${shots.new}" alt="After" loading="lazy"></div>` : ''}
+        </div>
+      </div>` : ''}
+
+      <div class="mt-2">
+        <button class="text-xs text-indigo-600 hover:underline" onclick="toggleDiff(this)">Show Diff</button>
+        <div class="hidden mt-2 text-xs font-mono bg-gray-50 rounded p-3 max-h-48 overflow-y-auto">
+          ${(c.removed || []).map(l => `<div class="diff-removed">- ${escapeHtml(l)}</div>`).join('')}
+          ${(c.added || []).map(l => `<div class="diff-added">+ ${escapeHtml(l)}</div>`).join('')}
+        </div>
+      </div>
+
+      <div class="flex gap-4 mt-2 text-xs text-gray-400">
+        <span>+${c.added_count} lines</span>
+        <span>-${c.removed_count} lines</span>
+        ${c.text_len_change ? `<span>Size: ${c.text_len_change > 0 ? '+' : ''}${c.text_len_change}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function findScreenshots(url, shotsByUrl) {
+  // Try to match URL to screenshots
+  const parsed = new URL(url);
+  const domain = parsed.hostname.replace(/^www\./, '');
+  const path = parsed.pathname.replace(/^\/|\/$/g, '').replace(/[^\w\-/]/g, '_');
+  const baseName = path || '_root';
+
+  // Direct match
+  let key = `${domain}/${baseName}`;
+  if (shotsByUrl[key]) return shotsByUrl[key];
+
+  // Try with domain underscores
+  const domainKey = domain.replace(/\./g, '_');
+  key = `${domainKey}/${baseName}`;
+  if (shotsByUrl[key]) return shotsByUrl[key];
+
+  // Partial match on path end
+  for (const [k, v] of Object.entries(shotsByUrl)) {
+    if (url.includes(k.split('/').pop())) return v;
+  }
+  return null;
+}
+
+async function toggleReport() {
+  reportVisible = !reportVisible;
+  const panel = document.getElementById('reportPanel');
+  if (reportVisible) {
+    panel.classList.remove('hidden');
+    const pairKey = document.getElementById('datePairSelect').value;
+    const [old_d, new_d] = pairKey.split('_');
+    const resp = await fetch(`/api/report/${old_d}/${new_d}`);
+    if (resp.ok) {
+      const data = await resp.json();
+      document.getElementById('reportContent').innerHTML = data.html || '<p class="text-gray-400">No report available.</p>';
+    } else {
+      document.getElementById('reportContent').innerHTML = '<p class="text-gray-400">Report not found.</p>';
+    }
+  } else {
+    panel.classList.add('hidden');
+  }
+}
+
+function toggleDiff(btn) {
+  const diff = btn.nextElementSibling;
+  diff.classList.toggle('hidden');
+  btn.textContent = diff.classList.contains('hidden') ? 'Show Diff' : 'Hide Diff';
+}
+
+function toggleScreenshots(btn) {
+  const div = btn.nextElementSibling;
+  div.classList.toggle('hidden');
+  btn.textContent = div.classList.contains('hidden') ? 'Show Screenshots' : 'Hide Screenshots';
+}
+
+// ========== TAB 3: Domain Deep Dive ==========
+function populateDomainPills() {
+  const container = document.getElementById('domainPills');
+  const domains = Object.keys(overviewData?.domain_totals || {});
+  container.innerHTML = domains.map(d => `
+    <button class="domain-pill px-3 py-1.5 rounded-full text-sm border border-gray-300" data-domain="${d}" onclick="selectDomain('${d}')">
+      ${DOMAIN_LABELS[d] || d}
+    </button>
+  `).join('');
+  if (domains.length) selectDomain(domains[0]);
+}
+
+function selectDomain(domain) {
+  selectedDomain = domain;
+  document.querySelectorAll('.domain-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.domain === domain);
+  });
+  renderDomainView(domain);
+}
+
+function renderDomainView(domain) {
+  const totalChanges = overviewData?.domain_totals?.[domain] || 0;
+
+  // Find all changes for this domain across all pairs
+  let allDomainChanges = [];
+  const pairs = datesData?.pairs || [];
+  pairs.forEach(p => {
+    const pairKey = `${p.old}_${p.new}`;
+    const changes = changesData?.[pairKey] || [];
+    changes.filter(c => c.domain_key === domain).forEach(c => {
+      allDomainChanges.push({ ...c, date: p.new_display, pair_key: pairKey });
+    });
+  });
+
+  // Stats
+  const avgSim = allDomainChanges.length
+    ? (allDomainChanges.reduce((s, c) => s + c.similarity, 0) / allDomainChanges.length).toFixed(2)
+    : '-';
+  const uniqueUrls = new Set(allDomainChanges.map(c => c.url)).size;
+
+  document.getElementById('domainStats').innerHTML = [
+    { label: 'Total Changes', value: totalChanges },
+    { label: 'Unique Pages', value: uniqueUrls },
+    { label: 'Avg Similarity', value: avgSim },
+  ].map(c => `
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="text-xs text-gray-500 uppercase">${c.label}</div>
+      <div class="text-xl font-bold mt-1">${c.value}</div>
+    </div>
+  `).join('');
+
+  // Timeline chart
+  const tlData = timelineData?.domains?.[domain] || [];
+  const tlDates = timelineData?.dates || [];
+  const ctx = document.getElementById('domainTimelineChart').getContext('2d');
+  if (domainTimelineChart) domainTimelineChart.destroy();
+  domainTimelineChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: tlDates.map(d => d.substring(5)),
+      datasets: [{
+        label: DOMAIN_LABELS[domain] || domain,
+        data: tlData,
+        backgroundColor: (DOMAIN_COLORS[domain] || '#6366f1') + '80',
+        borderColor: DOMAIN_COLORS[domain] || '#6366f1',
+        borderWidth: 1,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { font: { size: 10 } } },
+        y: { beginAtZero: true, title: { display: true, text: 'Changes' } },
+      },
+    },
+  });
+
+  // Table
+  const tbody = document.getElementById('domainTableBody');
+  tbody.innerHTML = allDomainChanges
+    .sort((a, b) => a.similarity - b.similarity)
+    .map(c => {
+      const simColor = c.similarity < 0.5 ? 'text-red-600' : c.similarity < 0.8 ? 'text-amber-600' : 'text-green-600';
+      return `<tr class="border-b hover:bg-gray-50">
+        <td class="py-2 px-3 text-xs text-gray-500 whitespace-nowrap">${c.date}</td>
+        <td class="py-2 px-3">
+          <div class="text-xs font-medium truncate max-w-md">${c.title || 'Untitled'}</div>
+          <a href="${c.url}" target="_blank" class="text-xs text-indigo-400 hover:underline">${c.url}</a>
+        </td>
+        <td class="py-2 px-3 text-xs font-mono ${simColor}">${Math.round(c.similarity * 100)}%</td>
+        <td class="py-2 px-3 text-xs ${c.text_len_change > 0 ? 'text-green-600' : c.text_len_change < 0 ? 'text-red-600' : 'text-gray-400'}">${c.text_len_change > 0 ? '+' : ''}${c.text_len_change}</td>
+      </tr>`;
+    }).join('');
+}
+
+// ========== TAB 4: Search ==========
+function doSearch() {
+  const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (!keyword) return;
+
+  const results = [];
+  const pairs = datesData?.pairs || [];
+  pairs.forEach(p => {
+    const pairKey = `${p.old}_${p.new}`;
+    const changes = changesData?.[pairKey] || [];
+    changes.forEach(c => {
+      const haystack = `${c.url} ${c.title} ${(c.added || []).join(' ')} ${(c.removed || []).join(' ')}`.toLowerCase();
+      if (haystack.includes(keyword)) {
+        results.push({ ...c, date: p.new_display, pair_key: pairKey });
+      }
+    });
+  });
+
+  const container = document.getElementById('searchResults');
+  if (!results.length) {
+    container.innerHTML = `<p class="text-gray-400 text-sm">No results for "${escapeHtml(keyword)}"</p>`;
+    return;
+  }
+
+  container.innerHTML = `<p class="text-sm text-gray-500 mb-3">${results.length} results for "${escapeHtml(keyword)}"</p>` +
+    results.map(c => {
+      const simColor = c.similarity < 0.5 ? 'text-red-600' : c.similarity < 0.8 ? 'text-amber-600' : 'text-green-600';
+      return `<div class="search-result">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-xs font-medium px-2 py-0.5 rounded-full text-white" style="background:${DOMAIN_COLORS[c.domain_key] || '#6366f1'}">${DOMAIN_LABELS[c.domain_key] || c.domain}</span>
+          <span class="text-xs text-gray-400">${c.date}</span>
+          <span class="text-xs font-mono ${simColor}">${Math.round(c.similarity * 100)}%</span>
+        </div>
+        <div class="text-sm font-medium">${c.title || 'Untitled'}</div>
+        <a href="${c.url}" target="_blank" class="text-xs text-indigo-400 hover:underline">${c.url}</a>
+      </div>`;
+    }).join('');
+}
+
+// ========== Utilities ==========
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ========== Start ==========
+init();
+</script>
+</body>
+</html>
