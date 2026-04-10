@@ -1,8 +1,8 @@
 # Web Crawl Comparison Tool
 
-比较两次 web archive (WARC/WACZ) 抓取的内容变化。
+Compare content changes between two web archive (WARC/WACZ) crawls.
 
-## 快速使用
+## Quick Start
 
 ```bash
 cd /Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/compare_script
@@ -14,150 +14,150 @@ python crawl_compare.py \
   --output ./reports
 ```
 
-## 输出文件
+## Output Files
 
-- `summary_report.md` - 变化统计摘要
-- `detailed_changes.md` - 详细的文本内容变化
-- `comparison_data.json` - JSON 格式数据（便于进一步分析）
+- `summary_report.md` - Summary of change statistics
+- `detailed_changes.md` - Detailed text content changes
+- `comparison_data.json` - JSON format data (for further analysis)
 
 ---
 
-## 脚本逻辑详解
+## Script Logic
 
-### 整体流程
+### Overall Pipeline
 
 ```
 ┌─────────────────────┐
-│ 1. 解析旧 Collection │
-│    (WARC → URL数据)  │
+│ 1. Parse Old Collection │
+│    (WARC → URL data)    │
 └──────────┬──────────┘
            │
 ┌──────────▼──────────┐
-│ 2. 解析新 Collection │
+│ 2. Parse New Collection │
 └──────────┬──────────┘
            │
 ┌──────────▼──────────┐
-│ 3. 比较              │
-│    - URL 列表对比    │
-│    - 内容哈希对比    │
-│    - 文本内容对比    │
+│ 3. Compare              │
+│    - URL list diff       │
+│    - Content hash diff   │
+│    - Text content diff   │
 └──────────┬──────────┘
            │
 ┌──────────▼──────────┐
-│ 4. 过滤噪音          │
-│    - Cloudflare 页面 │
-│    - 格式变化        │
-│    - 微小修改        │
+│ 4. Filter Noise         │
+│    - Cloudflare pages    │
+│    - Formatting changes  │
+│    - Minor edits         │
 └──────────┬──────────┘
            │
 ┌──────────▼──────────┐
-│ 5. 生成报告          │
+│ 5. Generate Reports     │
 └─────────────────────┘
 ```
 
-### 核心模块
+### Core Modules
 
-#### 1. WARC 解析 (`parse_warc_collection`)
+#### 1. WARC Parsing (`parse_warc_collection`)
 
 ```
-输入: collection/ 文件夹路径
+Input: collection/ folder path
      └── archive/
          ├── *.warc.gz
          └── ...
 
-处理:
-1. 遍历所有 .warc.gz 文件
-2. 解压并迭代每个 WARC record
-3. 提取:
+Processing:
+1. Iterate over all .warc.gz files
+2. Decompress and iterate each WARC record
+3. Extract:
    - URL (WARC-Target-URI)
-   - 内容 (HTTP response body)
+   - Content (HTTP response body)
    - Content-Type
-   - 内容哈希 (MD5)
-4. 如果是 HTML:
-   - 提取标题
-   - 提取可读文本 (去除脚本、样式、导航等)
-   - 计算文本哈希
+   - Content hash (MD5)
+4. If HTML:
+   - Extract title
+   - Extract readable text (strip scripts, styles, navigation, etc.)
+   - Compute text hash
 
-输出: {url: {hash, size, content_type, title, text, text_hash, ...}}
+Output: {url: {hash, size, content_type, title, text, text_hash, ...}}
 ```
 
-#### 2. 文本提取 (`extract_readable_text`)
+#### 2. Text Extraction (`extract_readable_text`)
 
 ```
-输入: HTML 内容
-处理:
-1. 解析 HTML (BeautifulSoup)
-2. 移除非内容元素:
+Input: HTML content
+Processing:
+1. Parse HTML (BeautifulSoup)
+2. Remove non-content elements:
    - script, style, noscript
    - iframe, svg, canvas
    - nav, header, footer, aside
-   - 常见 UI 类名 (.nav, .menu, .sidebar...)
-3. 提取主内容区 (main > article > body)
-4. 清理文本:
-   - 去除过短行
-   - 去除 UI 元素 ("Skip to content", "Menu"...)
-5. 规范化空白字符
+   - Common UI class names (.nav, .menu, .sidebar...)
+3. Extract main content area (main > article > body)
+4. Clean text:
+   - Remove overly short lines
+   - Remove UI elements ("Skip to content", "Menu"...)
+5. Normalize whitespace
 
-输出: (title, clean_text)
+Output: (title, clean_text)
 ```
 
-#### 3. 内容比较 (`compare_collections`)
+#### 3. Content Comparison (`compare_collections`)
 
 ```
-输入: data1 (旧), data2 (新)
+Input: data1 (old), data2 (new)
 
-URL 层面:
-- added = urls2 - urls1    (新增页面)
-- removed = urls1 - urls2  (删除页面)
-- common = urls1 ∩ urls2   (共同页面)
+URL level:
+- added = urls2 - urls1    (newly added pages)
+- removed = urls1 - urls2  (removed pages)
+- common = urls1 ∩ urls2   (pages present in both)
 
-内容层面:
+Content level:
 for url in common:
     if hash1 != hash2:
-        → 页面内容变化
+        → Page content changed
 
-输出: {added, removed, changed, stats}
+Output: {added, removed, changed, stats}
 ```
 
-#### 4. 文本变化分析 (`analyze_text_changes`)
+#### 4. Text Change Analysis (`analyze_text_changes`)
 
 ```
-输入: data1 (旧), data2 (新)
+Input: data1 (old), data2 (new)
 
 for url in common:
-    if text_hash 相同:
-        跳过 (文本无变化)
-    
-    if 是 Cloudflare 验证页:
-        跳过 (噪音)
-    
-    计算文本相似度 (difflib)
-    
-    if 相似度 > 98%:
-        跳过 (只是格式变化)
-    
-    if 变化行数 < 3:
-        跳过 (微小修改)
-    
-    记录为真实文本变化:
-        - 相似度
-        - 新增/删除的内容
-        - 行数统计
+    if text_hash matches:
+        skip (no text change)
 
-输出: {text_changes, stats}
+    if is Cloudflare verification page:
+        skip (noise)
+
+    Compute text similarity (difflib)
+
+    if similarity > 98%:
+        skip (formatting change only)
+
+    if changed lines < 3:
+        skip (minor edit)
+
+    Record as genuine text change:
+        - Similarity score
+        - Added/removed content
+        - Line count statistics
+
+Output: {text_changes, stats}
 ```
 
-### 过滤策略
+### Filtering Strategy
 
-| 过滤类型 | 检测方法 | 原因 |
+| Filter Type | Detection Method | Reason |
 |---------|---------|------|
-| Cloudflare 验证页 | 标题/URL 包含 "just a moment" 等 | 非实际内容 |
-| 格式变化 | 文本相似度 > 98% | 只是 HTML 结构变化 |
-| 微小修改 | 变化行数 < 3 | 可能是日期、计数器等 |
-| 非 HTML | Content-Type 检查 | API 响应、图片等 |
-| 短页面 | 文本长度 < 100 | 无意义内容 |
+| Cloudflare verification pages | Title/URL contains "just a moment", etc. | Not actual content |
+| Formatting changes | Text similarity > 98% | Only HTML structure changes |
+| Minor edits | Changed lines < 3 | Likely dates, counters, etc. |
+| Non-HTML | Content-Type check | API responses, images, etc. |
+| Short pages | Text length < 100 | Insignificant content |
 
-### 域名分类
+### Domain Categorization
 
 ```python
 DOMAIN_PATTERNS = {
@@ -170,7 +170,7 @@ DOMAIN_PATTERNS = {
 }
 ```
 
-### 内容类型分类
+### Content Type Classification
 
 ```python
 def get_content_type_category(content_type, url):
@@ -190,22 +190,22 @@ def get_content_type_category(content_type, url):
 
 ---
 
-## 配置参数
+## Configuration Parameters
 
 ```python
-# 最小文本长度（短于这个值的页面被忽略）
+# Minimum text length (pages shorter than this are ignored)
 MIN_TEXT_LENGTH = 100
 
-# 相似度阈值（高于此值视为格式变化）
+# Similarity threshold (above this value, changes are treated as formatting only)
 SIMILARITY_THRESHOLD = 0.98
 
-# 最小变化行数（少于这个视为微小修改）
+# Minimum changed lines (fewer than this is treated as a minor edit)
 MIN_CHANGED_LINES = 3
 ```
 
 ---
 
-## 数据流示例
+## Data Flow Example
 
 ```
 Collection 1 (crawl-20260315)
@@ -224,9 +224,9 @@ Collection 2 (crawl-20260316)
     ▼ parse_warc_collection
 {
   "https://docs.openclaw.ai/tools/firecrawl": {
-    "hash": "xyz789",        ← hash 变了
+    "hash": "xyz789",        ← hash changed
     "text": "Configure Firecrawl search...",
-    "text_hash": "ghi012"    ← text_hash 也变了
+    "text_hash": "ghi012"    ← text_hash also changed
   }
 }
 
@@ -234,7 +234,7 @@ Collection 2 (crawl-20260316)
     ▼ analyze_text_changes
 {
   "url": "https://docs.openclaw.ai/tools/firecrawl",
-  "similarity": 0.68,        ← 68% 相似，有实质变化
+  "similarity": 0.68,        ← 68% similar, substantive change
   "added": ["Configure Firecrawl search", ...],
   "removed": ["Configure Firecrawl", ...]
 }
@@ -242,24 +242,24 @@ Collection 2 (crawl-20260316)
 
 ---
 
-## 扩展
+## Extensions
 
-### 添加新的域名分类
+### Adding a New Domain Category
 
-编辑 `DOMAIN_PATTERNS`:
+Edit `DOMAIN_PATTERNS`:
 
 ```python
 DOMAIN_PATTERNS['newsite'] = ['newsite.com', 'docs.newsite.com']
 ```
 
-### 调整过滤严格程度
+### Adjusting Filter Strictness
 
 ```python
-# 更严格（只报告大变化）
+# Stricter (only report major changes)
 SIMILARITY_THRESHOLD = 0.90
 MIN_CHANGED_LINES = 10
 
-# 更宽松（报告更多小变化）
+# More lenient (report more minor changes)
 SIMILARITY_THRESHOLD = 0.99
 MIN_CHANGED_LINES = 1
 ```

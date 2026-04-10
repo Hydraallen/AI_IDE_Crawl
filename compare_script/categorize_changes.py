@@ -188,109 +188,109 @@ def main():
     
     # Generate report
     report = []
-    report.append("# 分类变化报告\n")
-    report.append(f"**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-    
+    report.append("# Categorized Changes Report\n")
+    report.append(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+
     # Summary
-    report.append("## 变化统计\n")
-    report.append(f"| 类型 | 变化数量 |")
-    report.append(f"|------|----------|")
+    report.append("## Change Statistics\n")
+    report.append(f"| Type | Count |")
+    report.append(f"|------|-------|")
     for cat in ['page', 'api', 'static_asset', 'video_embed', 'tracking', 'auth', 'image', 'challenge']:
         report.append(f"| {cat} | {len(by_type[cat])} |")
     report.append("")
     
-    report.append("## 按域名分类\n")
-    report.append(f"| 域名 | 变化数量 |")
-    report.append(f"|------|----------|")
+    report.append("## By Domain\n")
+    report.append(f"| Domain | Count |")
+    report.append(f"|--------|-------|")
     for domain, items in sorted(by_domain.items(), key=lambda x: -len(x[1])):
         report.append(f"| {domain} | {len(items)} |")
     report.append("")
     
     # Page changes (most important)
-    report.append("## 📄 页面内容变化 (page)\n")
+    report.append("## Page Content Changes (page)\n")
     pages = [p for p in by_type['page'] if p['title']]
     for p in pages[:100]:
         size_str = f"+{p['size_diff']}" if p['size_diff'] > 0 else str(p['size_diff'])
         report.append(f"- **{p['title']}**")
         report.append(f"  - URL: `{p['url'][:120]}`")
-        report.append(f"  - 大小变化: {size_str} bytes")
+        report.append(f"  - Size change: {size_str} bytes")
     if len(pages) > 100:
-        report.append(f"\n_...还有 {len(pages) - 100} 个页面变化_")
+        report.append(f"\n_...and {len(pages) - 100} more page changes_")
     report.append("")
     
     # API changes
-    report.append("## 🔌 API 变化 (api)\n")
+    report.append("## API Changes (api)\n")
     for p in by_type['api'][:50]:
         size_str = f"+{p['size_diff']}" if p['size_diff'] > 0 else str(p['size_diff'])
         report.append(f"- `{p['url'][:100]}` ({size_str} bytes)")
     if len(by_type['api']) > 50:
-        report.append(f"\n_...还有 {len(by_type['api']) - 50} 个 API 变化_")
+        report.append(f"\n_...and {len(by_type['api']) - 50} more API changes_")
     report.append("")
     
     # Video embed changes
-    report.append("## 🎬 视频嵌入变化 (video_embed)\n")
+    report.append("## Video Embed Changes (video_embed)\n")
     for p in by_type['video_embed'][:30]:
         size_str = f"+{p['size_diff']}" if p['size_diff'] > 0 else str(p['size_diff'])
         report.append(f"- `{p['url'][:100]}` ({size_str} bytes)")
     if len(by_type['video_embed']) > 30:
-        report.append(f"\n_...还有 {len(by_type['video_embed']) - 30} 个视频变化_")
+        report.append(f"\n_...and {len(by_type['video_embed']) - 30} more video changes_")
     report.append("")
     
     # Auth changes
-    report.append("## 🔐 认证相关变化 (auth)\n")
+    report.append("## Authentication Changes (auth)\n")
     for p in by_type['auth'][:50]:
         size_str = f"+{p['size_diff']}" if p['size_diff'] > 0 else str(p['size_diff'])
         report.append(f"- `{p['url'][:100]}` ({size_str} bytes)")
     if len(by_type['auth']) > 50:
-        report.append(f"\n_...还有 {len(by_type['auth']) - 50} 个认证相关变化_")
+        report.append(f"\n_...and {len(by_type['auth']) - 50} more auth changes_")
     report.append("")
     
     # Tracking changes
-    report.append("## 📊 跟踪/分析变化 (tracking)\n")
+    report.append("## Tracking/Analytics Changes (tracking)\n")
     for p in by_type['tracking'][:30]:
         size_str = f"+{p['size_diff']}" if p['size_diff'] > 0 else str(p['size_diff'])
         report.append(f"- `{p['url'][:100]}` ({size_str} bytes)")
     if len(by_type['tracking']) > 30:
-        report.append(f"\n_...还有 {len(by_type['tracking']) - 30} 个跟踪变化_")
+        report.append(f"\n_...and {len(by_type['tracking']) - 30} more tracking changes_")
     report.append("")
     
     # Static asset changes
-    report.append("## 📦 静态资源变化 (static_asset)\n")
+    report.append("## Static Asset Changes (static_asset)\n")
     by_domain_asset = defaultdict(list)
     for p in by_type['static_asset']:
         domain = p['url'].split('/')[2] if '/' in p['url'][8:] else p['url']
         by_domain_asset[domain].append(p)
     
-    report.append("### 按域名分布\n")
+    report.append("### Distribution by Domain\n")
     for domain, items in sorted(by_domain_asset.items(), key=lambda x: -len(x[1])):
-        report.append(f"- **{domain}**: {len(items)} 个文件")
+        report.append(f"- **{domain}**: {len(items)} files")
     report.append("")
     
     # Show some examples
-    report.append("### 示例\n")
+    report.append("### Examples\n")
     for p in by_type['static_asset'][:20]:
         report.append(f"- `{p['url'][:100]}`")
     if len(by_type['static_asset']) > 20:
-        report.append(f"\n_...还有 {len(by_type['static_asset']) - 20} 个静态资源变化_")
+        report.append(f"\n_...and {len(by_type['static_asset']) - 20} more static asset changes_")
     report.append("")
     
     # New pages
-    report.append("## ✨ 新增页面\n")
+    report.append("## New Pages\n")
     new_pages = [u for u in new_by_type['page']][:50]
     for url in sorted(new_pages):
         title = data2[url]['title'] if url in data2 else ''
         report.append(f"- [{title or url[:80]}]({url})")
     if len(new_by_type['page']) > 50:
-        report.append(f"\n_...还有 {len(new_by_type['page']) - 50} 个新增页面_")
+        report.append(f"\n_...and {len(new_by_type['page']) - 50} more new pages_")
     report.append("")
     
     # Removed pages
-    report.append("## ❌ 删除页面\n")
+    report.append("## Removed Pages\n")
     removed_pages = [u for u in removed_by_type['page']][:30]
     for url in sorted(removed_pages):
         report.append(f"- `{url}`")
     if len(removed_by_type['page']) > 30:
-        report.append(f"\n_...还有 {len(removed_by_type['page']) - 30} 个删除页面_")
+        report.append(f"\n_...and {len(removed_by_type['page']) - 30} more removed pages_")
     report.append("")
     
     # Write report
@@ -298,7 +298,7 @@ def main():
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report))
     
-    print(f"\n报告已保存到: {output_path}")
+    print(f"\nReport saved to: {output_path}")
     
     # Also output JSON for further analysis
     json_output = {
@@ -311,7 +311,7 @@ def main():
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(json_output, f, indent=2, ensure_ascii=False)
     
-    print(f"JSON 摘要: {json_path}")
+    print(f"JSON summary: {json_path}")
 
 
 if __name__ == '__main__':

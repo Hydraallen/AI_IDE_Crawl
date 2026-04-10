@@ -279,9 +279,9 @@ def main():
     
     # Generate detailed report
     report = []
-    report.append("# 文本内容变化详细报告\n")
-    report.append(f"**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-    report.append(f"**比较日期:** {old_date} → {new_date}\n")
+    report.append("# Text Content Changes Detailed Report\n")
+    report.append(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    report.append(f"**Comparison dates:** {old_date} -> {new_date}\n")
     report.append("")
     report.append("---\n")
     
@@ -291,9 +291,9 @@ def main():
         by_domain[item['domain']].append(item)
     
     # Summary
-    report.append("## 变化统计\n")
-    report.append(f"| 域名 | 变化数 |")
-    report.append(f"|------|--------|")
+    report.append("## Change Statistics\n")
+    report.append(f"| Domain | Changes |")
+    report.append(f"|--------|---------|")
     for domain, items in sorted(by_domain.items(), key=lambda x: -len(x[1])):
         report.append(f"| {domain} | {len(items)} |")
     report.append("")
@@ -303,7 +303,7 @@ def main():
     for domain in sorted(by_domain.keys(), key=lambda x: -len(by_domain[x])):
         items = by_domain[domain]
         
-        report.append(f"\n## {domain.upper()} ({len(items)} 个变化)\n")
+        report.append(f"\n## {domain.upper()} ({len(items)} changes)\n")
         report.append("---\n")
         
         for i, item in enumerate(items, 1):
@@ -311,37 +311,37 @@ def main():
             len_change = item['text_len_new'] - item['text_len_old']
             len_str = f"+{len_change}" if len_change > 0 else str(len_change)
             
-            report.append(f"\n### {i}. {item['title_new'] or item['title_old'] or '(无标题)'}\n")
+            report.append(f"\n### {i}. {item['title_new'] or item['title_old'] or '(no title)'}\n")
             
             # URL
             report.append(f"**URL:** `{item['url']}`\n")
             
             # Meta info
-            report.append(f"| 属性 | 旧值 ({old_date}) | 新值 ({new_date}) |")
-            report.append(f"|------|------------------|------------------|")
-            report.append(f"| 相似度 | - | {sim_pct:.1f}% |")
-            report.append(f"| 文本长度 | {item['text_len_old']} | {item['text_len_new']} ({len_str}) |")
+            report.append(f"| Attribute | Old ({old_date}) | New ({new_date}) |")
+            report.append(f"|-----------|------------------|------------------|")
+            report.append(f"| Similarity | - | {sim_pct:.1f}% |")
+            report.append(f"| Text length | {item['text_len_old']} | {item['text_len_new']} ({len_str}) |")
             if item['title_old'] != item['title_new']:
-                report.append(f"| 标题 | {item['title_old'][:50] if item['title_old'] else '-'} | {item['title_new'][:50] if item['title_new'] else '-'} |")
+                report.append(f"| Title | {item['title_old'][:50] if item['title_old'] else '-'} | {item['title_new'][:50] if item['title_new'] else '-'} |")
             report.append("")
             
             # Content changes
             if item['removed']:
-                report.append(f"\n#### 删除的内容 ({item['removed_count']} 行)\n")
+                report.append(f"\n#### Removed content ({item['removed_count']} lines)\n")
                 report.append("```diff")
                 for line in item['removed'][:30]:
                     report.append(f"- {line}")
                 if len(item['removed']) > 30:
-                    report.append(f"... 还有 {len(item['removed']) - 30} 行")
+                    report.append(f"... and {len(item['removed']) - 30} more lines")
                 report.append("```\n")
             
             if item['added']:
-                report.append(f"\n#### 新增的内容 ({item['added_count']} 行)\n")
+                report.append(f"\n#### Added content ({item['added_count']} lines)\n")
                 report.append("```diff")
                 for line in item['added'][:30]:
                     report.append(f"+ {line}")
                 if len(item['added']) > 30:
-                    report.append(f"... 还有 {len(item['added']) - 30} 行")
+                    report.append(f"... and {len(item['added']) - 30} more lines")
                 report.append("```\n")
             
             report.append("\n---\n")
@@ -351,7 +351,7 @@ def main():
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report))
     
-    print(f"\n报告已保存到: {output_file}")
+    print(f"\nReport saved to: {output_file}")
     
     # Also save JSON for machine processing
     json_file = output_dir / f'text_changes_detail_{old_date}_to_{new_date}.json'
@@ -369,7 +369,7 @@ def main():
             'changes': text_changes,
         }, f, indent=2, ensure_ascii=False)
     
-    print(f"JSON 已保存到: {json_file}")
+    print(f"JSON saved to: {json_file}")
 
 
 if __name__ == '__main__':

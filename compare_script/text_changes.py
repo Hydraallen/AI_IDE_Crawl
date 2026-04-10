@@ -290,25 +290,25 @@ def main():
     for item in text_changes:
         by_domain[item['domain']].append(item)
     
-    print(f"\n文本内容变化: {len(text_changes)}")
-    print(f"  Cloudflare 过滤: {cloudflare_filtered}")
-    print(f"  无实质变化: {no_real_change}")
+    print(f"\nText content changes: {len(text_changes)}")
+    print(f"  Cloudflare filtered: {cloudflare_filtered}")
+    print(f"  No real change: {no_real_change}")
     
     # Generate report
     report = []
-    report.append("# 文本内容变化报告\n")
-    report.append(f"**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-    report.append("只报告有实质性文本内容变化的页面，忽略格式、HTML结构等变化。\n")
+    report.append("# Text Content Changes Report\n")
+    report.append(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    report.append("Only pages with substantive text content changes are reported; formatting and HTML structure changes are ignored.\n")
     
     # Summary
-    report.append("## 统计\n")
-    report.append(f"- **文本内容变化: {len(text_changes)} 页**")
-    report.append(f"- Cloudflare 验证页: {cloudflare_filtered} (已排除)")
-    report.append(f"- 格式/微小变化: {no_real_change} (已忽略)\n")
+    report.append("## Statistics\n")
+    report.append(f"- **Text content changes: {len(text_changes)} pages**")
+    report.append(f"- Cloudflare challenge pages: {cloudflare_filtered} (excluded)")
+    report.append(f"- Formatting/minor changes: {no_real_change} (ignored)\n")
     
-    report.append("## 按域名分布\n")
-    report.append(f"| 域名 | 变化数 |")
-    report.append(f"|------|--------|")
+    report.append("## Distribution by Domain\n")
+    report.append(f"| Domain | Changes |")
+    report.append(f"|--------|---------|")
     for domain, items in sorted(by_domain.items(), key=lambda x: -len(x[1])):
         report.append(f"| {domain} | {len(items)} |")
     report.append("")
@@ -328,25 +328,25 @@ def main():
             
             report.append(f"### {p['title'][:80]}\n")
             report.append(f"**URL:** `{p['url'][:120]}`\n")
-            report.append(f"**相似度:** {sim_pct:.1f}% | **文本长度变化:** {len_str} 字符")
-            report.append(f"**变化:** +{p['added_count']} 行, -{p['removed_count']} 行\n")
+            report.append(f"**Similarity:** {sim_pct:.1f}% | **Text length change:** {len_str} chars")
+            report.append(f"**Changes:** +{p['added_count']} lines, -{p['removed_count']} lines\n")
             
             if p['removed']:
-                report.append(f"**删除的内容:**")
+                report.append(f"**Removed content:**")
                 for line in p['removed'][:5]:
                     if line.strip():
                         report.append(f"- {line[:150]}")
                 report.append("")
             
             if p['added']:
-                report.append(f"**新增的内容:**")
+                report.append(f"**Added content:**")
                 for line in p['added'][:5]:
                     if line.strip():
                         report.append(f"+ {line[:150]}")
                 report.append("")
         
         if len(items) > 30:
-            report.append(f"\n_...还有 {len(items) - 30} 个变化_")
+            report.append(f"\n_...and {len(items) - 30} more changes_")
         report.append("")
     
     # Write report
@@ -354,7 +354,7 @@ def main():
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report))
     
-    print(f"\n报告已保存到: {output_path}")
+    print(f"\nReport saved to: {output_path}")
 
 
 if __name__ == '__main__':

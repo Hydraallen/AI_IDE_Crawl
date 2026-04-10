@@ -174,22 +174,22 @@ def main():
     for item in changed:
         by_domain[item['domain']].append(item)
     
-    print(f"\n总变化: {len(changed)} (过滤掉 {cloudflare_filtered} 个 Cloudflare 页面)")
+    print(f"\nTotal changes: {len(changed)} (filtered out {cloudflare_filtered} Cloudflare pages)")
     
     # Generate report
     report = []
-    report.append("# 真实内容变化报告 (排除 Cloudflare 验证)\n")
-    report.append(f"**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-    
+    report.append("# Real Content Changes Report (Cloudflare Excluded)\n")
+    report.append(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+
     # Summary
-    report.append("## 统计\n")
-    report.append(f"- 原始变化: {len(changed) + cloudflare_filtered} 个")
-    report.append(f"- Cloudflare 验证页: {cloudflare_filtered} 个 (已排除)")
-    report.append(f"- **真实内容变化: {len(changed)} 个**\n")
+    report.append("## Statistics\n")
+    report.append(f"- Original changes: {len(changed) + cloudflare_filtered}")
+    report.append(f"- Cloudflare challenge pages: {cloudflare_filtered} (excluded)")
+    report.append(f"- **Real content changes: {len(changed)}**\n")
     
-    report.append("## 按域名分布\n")
-    report.append(f"| 域名 | 变化数 |")
-    report.append(f"|------|--------|")
+    report.append("## Distribution by Domain\n")
+    report.append(f"| Domain | Changes |")
+    report.append(f"|--------|---------|")
     for domain, items in sorted(by_domain.items(), key=lambda x: -len(x[1])):
         report.append(f"| {domain} | {len(items)} |")
     report.append("")
@@ -213,7 +213,7 @@ def main():
             report.append(f"  - {size_str} bytes")
         
         if len(items) > 50:
-            report.append(f"\n_...还有 {len(items) - 50} 个_")
+            report.append(f"\n_...and {len(items) - 50} more_")
         report.append("")
     
     # Write report
@@ -221,7 +221,7 @@ def main():
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report))
     
-    print(f"\n报告已保存到: {output_path}")
+    print(f"\nReport saved to: {output_path}")
     
     # Save JSON
     json_output = {

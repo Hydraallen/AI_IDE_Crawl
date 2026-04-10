@@ -162,4 +162,4 @@ def convert_markdown_to_pdf():
 if __name__ == '__main__':
     pdf_path = convert_markdown_to_pdf()
     if pdf_path:
-        print(f"\n📄 PDF 报告已生成: {pdf_path}")
+        print(f"\nPDF report generated: {pdf_path}")

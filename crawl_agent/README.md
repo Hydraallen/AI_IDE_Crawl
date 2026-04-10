@@ -1,79 +1,79 @@
-# crawl_agent 源码阅读指南
+# crawl_agent Source Code Reading Guide
 
-> 面向 LangChain 初学者的代码导读。按照阅读顺序，逐步拆解每个文件的作用和核心概念。
+> A code walkthrough for LangChain beginners. Follow the reading order below to progressively understand each file's purpose and core concepts.
 
-## 推荐阅读顺序
+## Recommended Reading Order
 
 ```
 config.py → cache.py → warc_loader.py → llm_client.py → prompts.py → tools.py → batch.py → agent.py → main.py → web/
-   配置        缓存        数据加载         LLM 客户端       提示词        工具定义      批量模式     Agent 模式     入口路由     可视化
+   Config      Cache       Data Loading      LLM Client       Prompts      Tool Defs     Batch Mode    Agent Mode     Entry Point    Visualization
 ```
 
-**为什么是这个顺序？** 前三个文件是纯 Python，不涉及 LangChain。从 `llm_client.py` 开始接触 LangChain，逐步引入工具、Prompt、Agent 等概念，最终看到它们如何组装在一起。
+**Why this order?** The first three files are pure Python with no LangChain involvement. Starting from `llm_client.py`, you begin encountering LangChain, and the guide gradually introduces tools, prompts, agents, and other concepts until you see how everything fits together.
 
 ---
 
-## 第 1 站：config.py（配置中心）
+## Stop 1: config.py (Configuration Hub)
 
-**LangChain 概念：无**
+**LangChain Concepts: None**
 
-这个文件做的事情很简单——定义常量和工具函数。但它是所有其他文件的基础。
+This file does something straightforward -- it defines constants and utility functions. But it serves as the foundation for all other files.
 
 ```python
-# 三个关键常量
-COLLECTIONS_DIR: Path   # WARC 文件在哪
-REPORTS_DIR: Path       # 报告输出到哪
-CACHE_DIR: Path         # 缓存存到哪
+# Three key constants
+COLLECTIONS_DIR: Path   # Where WARC files are located
+REPORTS_DIR: Path       # Where reports are output
+CACHE_DIR: Path         # Where cache is stored
 
-# 两个关键函数
-get_available_dates()     # 扫描文件夹，返回 ["20260315", "20260316", ...]
-get_consecutive_pairs()   # 返回 [("20260315","20260316"), ("20260316","20260317"), ...]
+# Two key functions
+get_available_dates()     # Scans directories, returns ["20260315", "20260316", ...]
+get_consecutive_pairs()   # Returns [("20260315","20260316"), ("20260316","20260317"), ...]
 ```
 
-**要点：**
-- 从项目根目录的 `env` 文件读取 API 密钥和 endpoint
-- `date_to_display("20260315")` → `"2026-03-15"`，只是格式转换
-- 所有路径都用 `pathlib.Path`，不用字符串拼接
+**Key Points:**
+- Reads API keys and endpoint from an `env` file in the project root
+- `date_to_display("20260315")` returns `"2026-03-15"` -- just a format conversion
+- All paths use `pathlib.Path` instead of string concatenation
 
 ---
 
-## 第 2 站：cache.py（缓存层）
+## Stop 2: cache.py (Caching Layer)
 
-**LangChain 概念：无**
+**LangChain Concepts: None**
 
-每次解析 WARC 文件需要 30-60 秒。这个文件让每个日期只解析一次。
+Parsing WARC files takes 30-60 seconds each time. This file ensures each date is parsed only once.
 
 ```python
 get_parsed_collection("20260315")
-# 第一次：解析 WARC → 存到 .cache/parsed/20260315.json → 返回数据
-# 第二次：直接读 JSON → 校验 checksum → 返回数据
+# First call:  Parse WARC → save to .cache/parsed/20260315.json → return data
+# Second call: Read JSON directly → validate checksum → return data
 ```
 
-**核心逻辑：**
+**Core Logic:**
 
 ```
-1. 计算 WARC 文件的 SHA-256 checksum（文件名+大小）
-2. 检查缓存文件是否存在且 checksum 匹配
-3. 匹配 → 直接读缓存返回
-4. 不匹配 → 调用 parse_warc_collection() 解析 → 写缓存 → 返回
+1. Compute SHA-256 checksum of WARC files (filename + size)
+2. Check whether cache file exists and checksum matches
+3. Match → read cache directly and return
+4. No match → call parse_warc_collection() to parse → write cache → return
 ```
 
-**要点：**
-- 缓存失效机制：如果 WARC 文件变了（新增或大小改变），checksum 不匹配，自动重新解析
-- 实际的解析工作委托给 `compare_script/crawl_compare.py`，这个文件只负责缓存策略
+**Key Points:**
+- Cache invalidation: if WARC files change (new files or size changes), the checksum no longer matches, triggering automatic re-parsing
+- The actual parsing work is delegated to `compare_script/crawl_compare.py`; this file only handles caching strategy
 
 ---
 
-## 第 3 站：warc_loader.py（数据加载层）
+## Stop 3: warc_loader.py (Data Loading Layer)
 
-**LangChain 概念：无**
+**LangChain Concepts: None**
 
-这是数据访问的核心接口。**tools.py 和 batch.py 都通过它获取数据**，不直接碰 WARC 文件。
+This is the core data access interface. **Both `tools.py` and `batch.py` retrieve data through it** -- they never touch WARC files directly.
 
 ```python
-# 最核心的函数
+# The most central function
 compare_two_dates("20260315", "20260316")
-# 返回:
+# Returns:
 {
     "comparison": {
         "stats": {"added_count": 2529, "removed_count": 2913, ...}
@@ -86,49 +86,49 @@ compare_two_dates("20260315", "20260316")
 }
 ```
 
-**要点：**
-- `get_collection_data(date_str)` → 调用 cache.py 获取某天的所有 URL 数据
-- `compare_two_dates(old, new)` → 调用两次 `get_collection_data`，然后比较
-- 比较逻辑在 `compare_script/crawl_compare.py` 里，这里只是薄封装
-- 用 `sys.path.insert` 来导入 `compare_script` 目录下的模块（不优雅但有效）
+**Key Points:**
+- `get_collection_data(date_str)` calls `cache.py` to get all URL data for a given date
+- `compare_two_dates(old, new)` calls `get_collection_data` twice, then compares
+- The comparison logic lives in `compare_script/crawl_compare.py`; this is just a thin wrapper
+- Uses `sys.path.insert` to import modules from the `compare_script` directory (not elegant but effective)
 
 ---
 
-## 第 4 站：llm_client.py（LLM 客户端）
+## Stop 4: llm_client.py (LLM Client)
 
-**LangChain 概念：ChatOpenAI**
+**LangChain Concepts: ChatOpenAI**
 
-从这里开始接触 LangChain。这是整个项目中唯一创建 LLM 实例的地方。
+From here on you start encountering LangChain. This is the only place in the entire project where an LLM instance is created.
 
 ```python
 from langchain_openai import ChatOpenAI
 
 def get_llm(temperature=0.1) -> ChatOpenAI:
     return ChatOpenAI(
-        model="glm-5.1",                           # 模型名
-        base_url="https://open.bigmodel.cn/...",     # 非 OpenAI 的 endpoint
-        api_key=os.environ["GLM_API_KEY"],           # 从环境变量读
-        temperature=0.1,                             # 低温度 = 更确定性的输出
-        max_tokens=4096,                             # 最大生成长度
+        model="glm-5.1",                           # Model name
+        base_url="https://open.bigmodel.cn/...",     # Non-OpenAI endpoint
+        api_key=os.environ["GLM_API_KEY"],           # Read from environment variable
+        temperature=0.1,                             # Low temperature = more deterministic output
+        max_tokens=4096,                             # Maximum generation length
     )
 ```
 
-**要点：**
-- `ChatOpenAI` 是 LangChain 对 OpenAI API 的封装。因为智谱 API 兼容 OpenAI 格式，所以只需要改 `base_url` 就能用
-- `temperature=0.1`：分析任务不需要创造力，要确定性输出
-- `call_llm_with_retry()`：带速率限制 + 指数退避重试（2s → 4s → 8s）
+**Key Points:**
+- `ChatOpenAI` is LangChain's wrapper around the OpenAI API. Since the Zhipu API is compatible with the OpenAI format, you only need to change `base_url` to use it
+- `temperature=0.1`: analysis tasks don't need creativity; deterministic output is preferred
+- `call_llm_with_retry()`: includes rate limiting and exponential backoff retry (2s -> 4s -> 8s)
 
-**LangChain 知识点：** LangChain 的 Chat Model 接口是统一的。`ChatOpenAI`、`ChatAnthropic`、`ChatGoogle` 都继承自 `BaseChatModel`，有相同的 `.invoke()` / `.batch()` 方法。这意味着换模型只需要改这一行。
+**LangChain Knowledge Point:** LangChain's Chat Model interface is unified. `ChatOpenAI`, `ChatAnthropic`, and `ChatGoogle` all inherit from `BaseChatModel` and share the same `.invoke()` / `.batch()` methods. This means switching models only requires changing this one line.
 
 ---
 
-## 第 5 站：prompts.py（提示词模板）
+## Stop 5: prompts.py (Prompt Templates)
 
-**LangChain 概念：Prompt Template**
+**LangChain Concepts: Prompt Template**
 
-定义了三套提示词，给不同场景用：
+Defines three sets of prompts for different scenarios:
 
-### 1. SYSTEM_PROMPT（角色设定）
+### 1. SYSTEM_PROMPT (Role Definition)
 
 ```python
 SYSTEM_PROMPT = """You are a web archive analyst specializing in AI coding tools.
@@ -136,9 +136,9 @@ You analyze daily web crawl snapshots of 9 AI coding tool websites...
 """
 ```
 
-告诉 LLM "你是谁"、"你的任务是什么"、"变化的分类标准是什么"。
+Tells the LLM "who you are," "what your task is," and "what the change classification criteria are."
 
-### 2. ANALYSIS_PROMPT（批量分析模板）
+### 2. ANALYSIS_PROMPT (Batch Analysis Template)
 
 ```python
 ANALYSIS_PROMPT = """{system_prompt}
@@ -154,151 +154,151 @@ ANALYSIS_PROMPT = """{system_prompt}
 """
 ```
 
-**要点：**
-- `{system_prompt}`、`{stats}` 等是占位符，在 `batch.py` 中用 `.format()` 填入真实数据
-- 指定了输出格式：Executive Summary → Statistics → Domain Breakdown → Significant Changes → ...
-- 每次 LLM 调用输入约 2000-4000 tokens（预处理后的摘要），不是原始 WARC 数据
+**Key Points:**
+- `{system_prompt}`, `{stats}`, etc. are placeholders that get filled with real data via `.format()` in `batch.py`
+- Specifies the output format: Executive Summary -> Statistics -> Domain Breakdown -> Significant Changes -> ...
+- Each LLM call takes about 2000-4000 tokens of input (pre-processed summaries), not raw WARC data
 
-### 3. INTERACTIVE_SYSTEM_PROMPT（交互模式）
+### 3. INTERACTIVE_SYSTEM_PROMPT (Interactive Mode)
 
-在 SYSTEM_PROMPT 基础上追加了工具使用指南，告诉 LLM 有哪些工具可用。
+Built on top of SYSTEM_PROMPT with appended tool usage instructions, telling the LLM which tools are available.
 
 ---
 
-## 第 6 站：tools.py（工具定义）
+## Stop 6: tools.py (Tool Definitions)
 
-**LangChain 概念：@tool 装饰器、Pydantic Schema、BaseModel**
+**LangChain Concepts: @tool Decorator, Pydantic Schema, BaseModel**
 
-这是 LangChain Agent 的核心——定义 Agent 可以调用哪些函数。
+This is the core of the LangChain Agent -- it defines which functions the Agent can call.
 
-### 工具是什么？
+### What is a Tool?
 
-Agent 本身不能直接操作数据。它只能"思考"然后"调用工具"。每个工具就是一个 Python 函数，加上描述信息，让 Agent 知道什么时候该用它。
+An Agent cannot directly manipulate data. It can only "think" and then "call tools." Each tool is a Python function with descriptive metadata that tells the Agent when to use it.
 
-### 怎么定义一个工具？
+### How to Define a Tool?
 
 ```python
-# Step 1: 定义参数 Schema（Pydantic BaseModel）
+# Step 1: Define the parameter schema (Pydantic BaseModel)
 class DatePairInput(BaseModel):
     old_date: str = Field(description="Earlier date in YYYYMMDD format")
     new_date: str = Field(description="Later date in YYYYMMDD format")
 
-# Step 2: 用 @tool 装饰器注册，指定参数 Schema
+# Step 2: Register with the @tool decorator, specifying the parameter schema
 @tool(args_schema=DatePairInput)
 def compare_dates(old_date: str, new_date: str) -> str:
     """Compare crawl data between two dates and return a domain-grouped summary."""
-    # Step 3: 函数体——调用 warc_loader 获取数据，格式化返回字符串
+    # Step 3: Function body -- call warc_loader to get data, format and return a string
     result = compare_two_dates(old_date, new_date)
     ...
-    return summary  # 必须返回字符串，Agent 通过文本理解结果
+    return summary  # Must return a string; the Agent understands results by reading text
 ```
 
-**要点：**
-- `"""docstring"""` 很重要——这就是 Agent 看到的工具描述，决定了它什么时候选这个工具
-- 参数用 `Pydantic BaseModel` 定义，LangChain 会自动做参数校验和类型转换
-- 返回值必须是 **字符串**，因为 Agent 通过阅读文本来理解结果
-- 6 个工具最终组成 `ALL_TOOLS` 列表：
+**Key Points:**
+- The `"""docstring"""` is crucial -- it is the tool description the Agent sees, which determines when it chooses this tool
+- Parameters are defined using `Pydantic BaseModel`; LangChain automatically handles parameter validation and type conversion
+- The return value must be a **string**, because the Agent understands results by reading text
+- The 6 tools are ultimately collected into the `ALL_TOOLS` list:
 
 ```python
 ALL_TOOLS = [
-    compare_dates,       # 对比两天数据
-    get_page_changes,    # 单个页面的详细 diff
-    get_domain_changes,  # 某个域名的所有变化
-    list_available_dates,# 列出所有日期
-    analyze_trend,       # 域名的时间序列趋势
-    search_changes,      # 关键词搜索
+    compare_dates,       # Compare data between two dates
+    get_page_changes,    # Detailed diff for a single page
+    get_domain_changes,  # All changes for a given domain
+    list_available_dates,# List all available dates
+    analyze_trend,       # Time-series trend for a domain
+    search_changes,      # Keyword search
 ]
 ```
 
-**LangChain 知识点：** `@tool` 是创建工具最简单的方式。底层是 `StructuredTool` 类。你也可以手动创建 `StructuredTool(name=..., func=..., description=..., args_schema=...)`。
+**LangChain Knowledge Point:** `@tool` is the simplest way to create a tool. Under the hood it uses the `StructuredTool` class. You can also manually create a `StructuredTool(name=..., func=..., description=..., args_schema=...)`.
 
 ---
 
-## 第 7 站：batch.py（批量分析模式）
+## Stop 7: batch.py (Batch Analysis Mode)
 
-**LangChain 概念：LLM Chain（最简单的调用模式）**
+**LangChain Concepts: LLM Chain (Simplest Invocation Pattern)**
 
-这个文件展示了 LangChain 最基本的用法：**构造 prompt → 调用 LLM → 获取结果**。不涉及 Agent，不涉及工具选择。
+This file demonstrates the most basic LangChain usage: **construct a prompt -> call the LLM -> get the result**. No Agent, no tool selection.
 
-### 核心流程
+### Core Flow
 
 ```python
 def run_batch():
-    llm = get_llm()                          # 1. 创建 LLM 实例
-    pairs = get_consecutive_pairs()           # 2. 获取所有日期对
+    llm = get_llm()                          # 1. Create LLM instance
+    pairs = get_consecutive_pairs()           # 2. Get all date pairs
 
     for old_date, new_date in pairs:
-        result = compare_two_dates(old, new)  # 3. 获取比较数据
+        result = compare_two_dates(old, new)  # 3. Get comparison data
 
-        prompt = ANALYSIS_PROMPT.format(      # 4. 填充模板
+        prompt = ANALYSIS_PROMPT.format(      # 4. Fill the template
             system_prompt=SYSTEM_PROMPT,
             stats=_format_stats(result),
             domain_breakdown=_format_domain_breakdown(result),
             changes_data=_format_changes_data(result),
         )
 
-        report = call_llm_with_retry(llm, prompt)  # 5. 调用 LLM
-        write_report(report)                       # 6. 写入文件
+        report = call_llm_with_retry(llm, prompt)  # 5. Call the LLM
+        write_report(report)                       # 6. Write to file
 ```
 
-**要点：**
-- 这是 **Chain 模式**（不是 Agent 模式）：固定的 prompt 构造 → LLM 调用，没有自主决策
-- `_format_stats()`、`_format_domain_breakdown()` 把数据转成 Markdown 表格，塞进 prompt
-- `_format_changes_data()` 截断到前 15 个变化（控制 token 数）
-- 截图部分：调用 `screenshot.py` 用 Playwright 截取变化页面的 before/after
+**Key Points:**
+- This is the **Chain pattern** (not Agent mode): fixed prompt construction -> LLM call, no autonomous decision-making
+- `_format_stats()` and `_format_domain_breakdown()` convert data into Markdown tables and embed them into the prompt
+- `_format_changes_data()` truncates to the first 15 changes (to control token count)
+- Screenshot section: calls `screenshot.py` to use Playwright for capturing before/after screenshots of changed pages
 
 ---
 
-## 第 8 站：agent.py（交互 Agent 模式）
+## Stop 8: agent.py (Interactive Agent Mode)
 
-**LangChain 概念：ReAct Agent、AgentExecutor、create_react_agent**
+**LangChain Concepts: ReAct Agent, AgentExecutor, create_react_agent**
 
-这是整个项目最核心的 LangChain 用法——一个能自主选择工具的 Agent。
+This is the most essential LangChain usage in the entire project -- an Agent that can autonomously select tools.
 
-### ReAct 是什么？
+### What is ReAct?
 
-ReAct = **Re**asoning + **Act**ing。Agent 按这个循环工作：
+ReAct = **Re**asoning + **Act**ing. The Agent works in this loop:
 
 ```
-Thought: 用户问的是 Cursor 的变化，我应该先获取数据
+Thought: The user is asking about Cursor's changes, I should get the data first
 Action: get_domain_changes(domain="cursor.com", old_date="20260315", new_date="20260316")
 Observation: Changes for cursor.com (1 URLs): cursor.com/pricing (similarity: 0.60)
-Thought: 现在我有数据了，可以回答用户
-Final Answer: Cursor 在 3 月 15 日到 16 日之间，定价页面发生了重大变化...
+Thought: Now I have the data, I can answer the user
+Final Answer: Cursor had a major change on the pricing page between March 15 and 16...
 ```
 
-### 代码拆解
+### Code Breakdown
 
 ```python
 def run_agent():
-    # 1. 创建 LLM
-    llm = get_llm(temperature=0.2)  # 交互模式温度稍高，回答更自然
+    # 1. Create the LLM
+    llm = get_llm(temperature=0.2)  # Slightly higher temperature for interactive mode, more natural responses
 
-    # 2. 创建 Prompt（告诉 Agent 怎么做 ReAct 循环）
+    # 2. Create the Prompt (tell the Agent how to do the ReAct loop)
     prompt = PromptTemplate.from_template(REACT_TEMPLATE).partial(
         system_prompt=INTERACTIVE_SYSTEM_PROMPT
     )
 
-    # 3. 创建 Agent（LLM + 工具 + Prompt → 一个能自主决策的 Agent）
+    # 3. Create the Agent (LLM + tools + prompt -> an autonomous decision-making Agent)
     agent = create_react_agent(llm, ALL_TOOLS, prompt)
 
-    # 4. 创建 AgentExecutor（给 Agent 加上执行控制）
+    # 4. Create the AgentExecutor (add execution control to the Agent)
     agent_executor = AgentExecutor(
         agent=agent,
         tools=ALL_TOOLS,
-        max_iterations=10,        # 最多思考 10 轮
-        handle_parsing_errors=True, # LLM 输出格式错误时不崩溃
-        verbose=True,             # 打印思考过程
+        max_iterations=10,        # Maximum 10 thinking rounds
+        handle_parsing_errors=True, # Don't crash on LLM output format errors
+        verbose=True,             # Print the thinking process
     )
 
-    # 5. REPL 循环
+    # 5. REPL loop
     while True:
         user_input = input("You: ")
         response = agent_executor.invoke({"input": user_input})
         print(f"Agent: {response['output']}")
 ```
 
-### REACT_TEMPLATE 长什么样？
+### What Does REACT_TEMPLATE Look Like?
 
 ```
 {system_prompt}
@@ -320,91 +320,91 @@ Question: {input}
 Thought: {agent_scratchpad}
 ```
 
-**要点：**
-- `{tools}` 被自动替换为所有工具的名称和描述
-- `{agent_scratchpad}` 是 Agent 之前的思考记录（"记忆"）
-- `create_react_agent()` 做的事情：让 LLM 学会按这个格式输出，LangChain 负责解析和执行
-- `max_iterations=10`：防止 Agent 陷入死循环
+**Key Points:**
+- `{tools}` is automatically replaced with the names and descriptions of all tools
+- `{agent_scratchpad}` holds the Agent's previous thinking records (its "memory")
+- `create_react_agent()` does the following: it teaches the LLM to output in this format, and LangChain handles parsing and execution
+- `max_iterations=10`: prevents the Agent from entering an infinite loop
 
-**LangChain 知识点：**
-- `create_react_agent` 是 LangChain 内置的 Agent 类型之一
-- Agent vs Chain 的区别：Chain 的调用路径是固定的，Agent 会根据输入自主选择调哪些工具、调几次
-- `AgentExecutor` 是 Agent 的运行时环境，管理工具调用、错误处理、迭代控制
+**LangChain Knowledge Points:**
+- `create_react_agent` is one of LangChain's built-in Agent types
+- Agent vs. Chain: a Chain has a fixed invocation path; an Agent autonomously decides which tools to call and how many times based on the input
+- `AgentExecutor` is the Agent's runtime environment, managing tool calls, error handling, and iteration control
 
 ---
 
-## 第 9 站：main.py（CLI 入口）
+## Stop 9: main.py (CLI Entry Point)
 
-**LangChain 概念：无**
+**LangChain Concepts: None**
 
-纯 CLI 路由，用 `argparse` 分发到不同模式：
+Pure CLI routing using `argparse` to dispatch to different modes:
 
 ```python
-python crawl_agent/main.py batch      → run_batch()
-python crawl_agent/main.py agent      → run_agent()
-python crawl_agent/main.py visualize  → run_server()
+python crawl_agent/main.py batch      -> run_batch()
+python crawl_agent/main.py agent      -> run_agent()
+python crawl_agent/main.py visualize  -> run_server()
 ```
 
 ---
 
-## 第 10 站：web/（可视化层）
+## Stop 10: web/ (Visualization Layer)
 
-**LangChain 概念：无**
+**LangChain Concepts: None**
 
-这是消费层，不涉及 LangChain。它读取前面步骤产生的数据，展示在网页上。
+This is the consumption layer with no LangChain involvement. It reads data produced by the previous steps and displays it on a web page.
 
 ```
 web/
-├── data_builder.py   # 调用 warc_loader 获取所有数据 → 聚合成 JSON 文件
-├── app.py            # Flask 路由，提供 API + 静态文件服务
+├── data_builder.py   # Calls warc_loader to get all data -> aggregates into JSON files
+├── app.py            # Flask routes, serving API + static files
 ├── templates/
-│   └── index.html    # 单页应用（Chart.js + Tailwind CSS）
+│   └── index.html    # Single-page app (Chart.js + Tailwind CSS)
 └── static/
     ├── css/style.css
-    └── data/         # data_builder.py 的输出
+    └── data/         # Output from data_builder.py
 ```
 
-**数据流：**
+**Data Flow:**
 ```
-warc_loader.compare_two_dates()  →  data_builder.build_all_data()
-                                    → overview.json    (聚合统计)
-                                    → timeline.json    (每域名每日变化数)
-                                    → changes.json     (所有文本变化)
-                                    → stats.json       (每对统计)
-                                    → dates.json       (日期列表)
-                                    → screenshots.json (截图索引)
+warc_loader.compare_two_dates()  ->  data_builder.build_all_data()
+                                       -> overview.json    (aggregated statistics)
+                                       -> timeline.json    (daily change count per domain)
+                                       -> changes.json     (all text changes)
+                                       -> stats.json       (per-pair statistics)
+                                       -> dates.json       (date list)
+                                       -> screenshots.json (screenshot index)
 
-Flask app.py  →  读取这些 JSON  →  通过 API 路由提供给前端
-             →  /api/report/     →  读 markdown 报告 → 转 HTML
-             →  /api/screenshots/ →  提供 PNG 文件
+Flask app.py  ->  Reads these JSONs  ->  Serves them to the frontend via API routes
+             ->  /api/report/     ->  Reads markdown reports -> converts to HTML
+             ->  /api/screenshots/ ->  Serves PNG files
 ```
 
 ---
 
-## LangChain 概念速查表
+## LangChain Concepts Quick Reference
 
-| 文件 | LangChain 概念 | 说明 |
-|------|----------------|------|
-| llm_client.py | `ChatOpenAI` | LLM 客户端封装 |
-| prompts.py | Prompt Template | 用 `{variable}` 占位的文本模板 |
-| tools.py | `@tool`、`BaseModel` | 把 Python 函数包装成 Agent 可调用的工具 |
-| batch.py | LLM Chain | 固定流程：构造 prompt → 调 LLM → 取结果 |
-| agent.py | `create_react_agent`、`AgentExecutor` | 自主决策 Agent，循环思考+行动 |
+| File | LangChain Concept | Description |
+|------|-------------------|-------------|
+| llm_client.py | `ChatOpenAI` | LLM client wrapper |
+| prompts.py | Prompt Template | Text templates with `{variable}` placeholders |
+| tools.py | `@tool`, `BaseModel` | Wraps Python functions into Agent-callable tools |
+| batch.py | LLM Chain | Fixed pipeline: construct prompt -> call LLM -> get result |
+| agent.py | `create_react_agent`, `AgentExecutor` | Autonomous decision-making Agent, looping through thinking + acting |
 
-## 调试技巧
+## Debugging Tips
 
-### 1. 查看 Agent 的思考过程
+### 1. Inspect the Agent's Thinking Process
 
 ```bash
 python crawl_agent/main.py agent
-# verbose=True 会打印：
+# verbose=True will print:
 # > Entering new AgentExecutor chain...
 # Thought: ...
 # Action: compare_dates(...)
 # Observation: ...
 ```
 
-### 2. 单独测试某个工具
+### 2. Test a Single Tool in Isolation
 
 ```python
 from crawl_agent.tools import compare_dates, list_available_dates
@@ -412,7 +412,7 @@ print(list_available_dates.invoke({}))
 print(compare_dates.invoke({"old_date": "20260315", "new_date": "20260316"}))
 ```
 
-### 3. 直接调用 LLM（不经过 Agent）
+### 3. Call the LLM Directly (Bypassing the Agent)
 
 ```python
 from crawl_agent.llm_client import get_llm
@@ -421,9 +421,9 @@ response = llm.invoke("What are the main changes in Cursor's pricing?")
 print(response.content)
 ```
 
-### 4. 可视化调试
+### 4. Visual Debugging
 
 ```bash
 python visualize.py --build-data
-# 在浏览器中直观查看所有比较数据
+# View all comparison data visually in the browser
 ```

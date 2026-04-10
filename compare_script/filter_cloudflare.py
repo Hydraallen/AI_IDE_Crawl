@@ -66,22 +66,22 @@ for p in real_pages:
 
 # Generate filtered report
 report = []
-report.append("# 真实内容变化报告 (排除 Cloudflare 验证)\n")
-report.append(f"**生成时间:** 2026-03-16\n")
+report.append("# Real Content Changes Report (Cloudflare Excluded)\n")
+report.append(f"**Generated:** 2026-03-16\n")
 report.append("")
 
 # Summary
-report.append("## 过滤统计\n")
-report.append(f"| 类别 | 数量 |")
-report.append(f"|------|------|")
-report.append(f"| 原始页面变化 | {len(all_pages)} |")
-report.append(f"| Cloudflare 验证页 | {len(cloudflare_pages)} |")
-report.append(f"| **真实内容变化** | **{len(real_pages)}** |")
+report.append("## Filter Statistics\n")
+report.append(f"| Category | Count |")
+report.append(f"|----------|-------|")
+report.append(f"| Original page changes | {len(all_pages)} |")
+report.append(f"| Cloudflare challenge pages | {len(cloudflare_pages)} |")
+report.append(f"| **Real content changes** | **{len(real_pages)}** |")
 report.append("")
 
-report.append("## 按域名分布\n")
-report.append(f"| 域名 | 变化数 |")
-report.append(f"|------|--------|")
+report.append("## Distribution by Domain\n")
+report.append(f"| Domain | Changes |")
+report.append(f"|--------|---------|")
 for domain, items in sorted(by_domain.items(), key=lambda x: -len(x[1])):
     report.append(f"| {domain} | {len(items)} |")
 report.append("")
@@ -92,7 +92,7 @@ for domain in ['openclaw', 'cursor', 'windsurf', 'claude', 'replit', 'bolt', 'gi
     if not items:
         continue
     
-    report.append(f"## {domain.upper()} 变化 ({len(items)})\n")
+    report.append(f"## {domain.upper()} Changes ({len(items)})\n")
     
     # Sort by absolute size change
     items_sorted = sorted(items, key=lambda x: abs(x.get('size_diff', 0)), reverse=True)
@@ -105,10 +105,10 @@ for domain in ['openclaw', 'cursor', 'windsurf', 'claude', 'replit', 'bolt', 'gi
         
         report.append(f"- **{title}**")
         report.append(f"  - `{url_short}`")
-        report.append(f"  - 大小: {size_str} bytes")
+        report.append(f"  - Size: {size_str} bytes")
     
     if len(items) > 30:
-        report.append(f"\n_...还有 {len(items) - 30} 个变化_")
+        report.append(f"\n_...and {len(items) - 30} more changes_")
     report.append("")
 
 # Write report
@@ -116,4 +116,4 @@ output_path = Path(__file__).parent / 'real_changes.md'
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write('\n'.join(report))
 
-print(f"\n报告已保存到: {output_path}")
+print(f"\nReport saved to: {output_path}")
