@@ -11,6 +11,7 @@ compare_script/venv/
 __pycache__/
 *.pyc
 *.pyo
+.ruff_cache/
 
 # Crawl agent cache
 crawl_agent/.cache/
@@ -30,3 +31,9 @@ compare_script/real_changes.md
 compare_script/text_changes.md
 compare_script/reports/
 compare_script/reports_*/
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Visualization pre-built data (regenerated via --build-data)
+crawl_agent/web/static/data/
