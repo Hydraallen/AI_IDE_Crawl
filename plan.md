@@ -2,7 +2,7 @@
 
 ## Context
 
-The AI Coding Tools project uses Browsertrix to crawl 9 AI coding tool websites daily (Cursor, Windsurf, GitHub Copilot, Antigravity, Trae, OpenClaw, Bolt.new, Replit, Claude), storing results as WARC.gz files. There are currently 23 daily collections (2026-03-15 to 2026-04-07), totaling approximately 180GB. The existing `compare_script/` has complete WARC parsing and comparison code, but only outputs raw diffs without LLM analysis. We need to build a LangChain Agent that automatically compares daily crawl differences, uses an LLM (GLM-5.1) to analyze the reasons for changes, and generates detailed reports.
+The automated web archiving pipeline uses Browsertrix to crawl 9 AI coding tool websites daily (Cursor, Windsurf, GitHub Copilot, Antigravity, Trae, OpenClaw, Bolt.new, Replit, Claude), storing results as WARC.gz files. There are currently 23 daily collections (2026-03-15 to 2026-04-07), totaling approximately 180GB. The existing `compare_script/` has complete WARC parsing and comparison code, but only outputs raw diffs without LLM analysis. We need to build a LangChain Agent that automatically compares daily crawl differences, uses an LLM (GLM-5.1) to analyze the reasons for changes, and generates detailed reports.
 
 ## Python Environment
 
@@ -10,7 +10,7 @@ The AI Coding Tools project uses Browsertrix to crawl 9 AI coding tool websites 
 
 ```bash
 # Create virtual environment in the project root
-cd /Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project
+cd /path/to/project
 python3 -m venv .venv
 source .venv/bin/activate
 
@@ -213,15 +213,15 @@ python crawl_agent/main.py agent                               # Interactive mod
 
 ### Context
 
-The Agent has generated 22 daily comparison reports (`reports/*.md`) + 168MB of screenshots (`reports/screenshots/`), but they can only be viewed by reading the raw files. A web frontend is needed to interactively display the evolution of 9 AI coding tool websites over 25 days, suitable for the Automated web archiving pipeline presentation.
+The Agent has generated 22 daily comparison reports (`reports/*.md`) + 168MB of screenshots (`reports/screenshots/`), but they can only be viewed by reading the raw files. A web frontend is needed to interactively display the evolution of 9 AI coding tool websites over 25 days.
 
 ### Python Environment
 
 **All Python operations must use the project root `.venv`:**
 
 ```bash
-/Volumes/EDITH/AI Coding Tools_Project/.venv/bin/python   # Run scripts
-/Volumes/EDITH/AI Coding Tools_Project/.venv/bin/pip       # Install dependencies
+.venv/bin/python   # Run scripts
+.venv/bin/pip       # Install dependencies
 ```
 
 ### Tech Stack

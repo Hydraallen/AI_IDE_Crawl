@@ -260,7 +260,7 @@ a:hover {{ text-decoration: underline; }}
 iframe {{ width: 100%; height: 80vh; border: 1px solid #444; border-radius: 8px; margin-top: 12px; }}
 </style>
 </head><body>
-<h1>AI Coding Tools WARC Viewer</h1>
+<h1>AI Coding Tools Web Archive Viewer</h1>
 <div class="controls">
   <label>Date:</label>
   <select id="dateSelect">{date_options}</select>

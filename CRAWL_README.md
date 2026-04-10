@@ -74,8 +74,8 @@ crawls/
 
 ```bash
 docker run -it \
-  -v "/Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/crawls:/crawls" \
-  -v "/Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/browsertrix-config.yaml:/config.yaml:ro" \
+  -v "$(pwd)/crawls:/crawls" \
+  -v "$(pwd)/browsertrix-config.yaml:/config.yaml:ro" \
   webrecorder/browsertrix-crawler:latest \
   crawl \
   --config /config.yaml \
@@ -107,7 +107,7 @@ Based on Collection Plan (daily crawls):
 
 ```bash
 # Add to crontab (crontab -e)
-0 2 * * * /Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/crawl.sh daily-$(date +\%Y\%m\%d)
+0 2 * * * /path/to/AI_IDE_Crawl/crawl.sh daily-$(date +\%Y\%m\%d)
 ```
 
 Or use launchd for macOS:
@@ -117,10 +117,10 @@ Or use launchd for macOS:
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.aicoding.browsertrix</string>
+    <string>com.aicoding.browsertrix-crawl</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/crawl.sh</string>
+        <string>/path/to/AI_IDE_Crawl/crawl.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>

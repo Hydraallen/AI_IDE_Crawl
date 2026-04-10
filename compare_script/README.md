@@ -5,7 +5,7 @@ Compare content changes between two web archive (WARC/WACZ) crawls.
 ## Quick Start
 
 ```bash
-cd /Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/compare_script
+cd compare_script
 source venv/bin/activate
 
 python crawl_compare.py \

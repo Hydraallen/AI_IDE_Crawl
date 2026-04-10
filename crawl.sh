@@ -1,13 +1,14 @@
 #!/bin/bash
-# Browsertrix Crawl Script for AI Coding Tools Project
+# Browsertrix Crawl Script for AI Coding Tools Crawl
 # Usage: ./crawl.sh [collection-name]
 
 COLLECTION_NAME=${1:-"crawl-$(date +%Y%m%d)"}
-CONFIG_FILE="/Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/browsertrix-config-simple.yaml"
-OUTPUT_DIR="/Volumes/EDITH/Bots/F.R.I.D.A.Y./workspace/AI Coding Tools_Project/crawls"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CONFIG_FILE="$SCRIPT_DIR/browsertrix-config-simple.yaml"
+OUTPUT_DIR="$SCRIPT_DIR/crawls"
 
 echo "=========================================="
-echo "AI Coding Tools Web Crawl"
+echo "AI Coding Tools Web Archival Crawl"
 echo "=========================================="
 echo "Collection: $COLLECTION_NAME"
 echo "Config: $CONFIG_FILE"
