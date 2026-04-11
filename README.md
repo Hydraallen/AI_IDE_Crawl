@@ -22,7 +22,7 @@ The system performs daily automated web crawls, compares consecutive snapshots, 
 AI Coding Tools_Project/
 ├── crawl.sh                         # Web crawl entry point (Docker + Browsertrix)
 ├── browsertrix-config-simple.yaml   # Active crawl config (9 seeds, depth 2)
-├── com.aicoding.browsertrix-crawl.plist # macOS launchd daily schedule
+├── com.auto.browsertrix-crawl.plist # macOS launchd daily schedule
 │
 ├── crawl_agent/                     # LLM-powered analysis agent
 │   ├── main.py                      # CLI entry: batch / agent / visualize

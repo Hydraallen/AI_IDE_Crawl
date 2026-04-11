@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.aicoding.browsertrix-crawl</string>
+    <string>com.auto.browsertrix-crawl</string>
 
     <key>ProgramArguments</key>
     <array>

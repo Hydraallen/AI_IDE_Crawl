@@ -117,7 +117,7 @@ Or use launchd for macOS:
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.aicoding.browsertrix-crawl</string>
+    <string>com.auto.browsertrix-crawl</string>
     <key>ProgramArguments</key>
     <array>
         <string>/path/to/AI_IDE_Crawl/crawl.sh</string>
